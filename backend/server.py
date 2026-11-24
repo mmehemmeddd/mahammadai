@@ -14,7 +14,7 @@ PORT = int(os.environ.get("PORT", 3000))
 SECRET_KEY = b"mahammad-offline-ai-ultra-secure-key-2026"
 GOOGLE_CLIENT_ID = "427833067127-jaq0aob8eismkafbitvj70a56padb7l2.apps.googleusercontent.com"
 ADMIN_SECRET_KEY = os.environ.get("ADMIN_KEY", "admin12345")
-DEFAULT_GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
+DEFAULT_GEMINI_KEY = os.environ.get("GEMINI_API_KEY") or os.environ.get("gemini") or os.environ.get("GEMINI") or ""
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, ".."))

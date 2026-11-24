@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'mahammad-offline-ai-ultra-secure-key-2026';
 const GOOGLE_CLIENT_ID = '427833067127-jaq0aob8eismkafbitvj70a56padb7l2.apps.googleusercontent.com';
 const ADMIN_SECRET_KEY = process.env.ADMIN_KEY || 'admin12345';
-const DEFAULT_GEMINI_KEY = process.env.GEMINI_API_KEY || '';
+const DEFAULT_GEMINI_KEY = process.env.GEMINI_API_KEY || process.env.gemini || process.env.GEMINI || '';
 const DB_FILE = path.join(__dirname, 'database.sqlite');
 const LEGACY_USERS_FILE = path.join(__dirname, 'users.json');
 
@@ -157,7 +157,7 @@ app.post('/api/chat', async (req, res) => {
             return res.status(400).json({ error: 'Yalnız "gemini" provayderi server üzərindən qəbul edilir. Lokal Ollama üçün birbaşa brauzerdən localhost:11434 istifadə olunur.' });
         }
 
-        const effectiveKey = apiKey || process.env.GEMINI_API_KEY || DEFAULT_GEMINI_KEY;
+        const effectiveKey = apiKey || process.env.GEMINI_API_KEY || process.env.gemini || process.env.GEMINI || DEFAULT_GEMINI_KEY;
 
         if (!effectiveKey) {
             return res.status(400).json({

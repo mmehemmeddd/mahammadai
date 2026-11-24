@@ -6,7 +6,7 @@ const https = require('https');
 const SECRET_KEY = 'mahammad-offline-ai-netlify-secret-2026';
 const GOOGLE_CLIENT_ID = '427833067127-jaq0aob8eismkafbitvj70a56padb7l2.apps.googleusercontent.com';
 const ADMIN_SECRET_KEY = process.env.ADMIN_KEY || 'admin12345';
-const DEFAULT_GEMINI_KEY = process.env.GEMINI_API_KEY || '';
+const DEFAULT_GEMINI_KEY = process.env.GEMINI_API_KEY || process.env.gemini || process.env.GEMINI || '';
 const USERS_FILE = path.join('/tmp', 'users.json');
 
 function readUsers() {
@@ -178,7 +178,7 @@ exports.handler = async (event, context) => {
             return { statusCode: 400, headers, body: JSON.stringify({ error: 'Yalnız "gemini" provayderi qəbul edilir.' }) };
         }
 
-        const effectiveKey = apiKey || process.env.GEMINI_API_KEY || DEFAULT_GEMINI_KEY;
+        const effectiveKey = apiKey || process.env.GEMINI_API_KEY || process.env.gemini || process.env.GEMINI || DEFAULT_GEMINI_KEY;
         if (!effectiveKey) {
             return {
                 statusCode: 400,
