@@ -1202,10 +1202,10 @@ if %errorlevel% neq 0 (
 
     <!-- JavaScript Məntiqi (Backend API & UI İnteqrasiyası) -->
     <script>
-        // API Base URL (Əgər Node.js serverdən açılıbsa nisbi, birbaşa fayldan açılıbsa http://localhost:3000)
-        const API_BASE = (window.location.protocol.startsWith('http') && window.location.port === '3000') 
-            ? '' 
-            : 'http://localhost:3000';
+        // API Base URL (Netlify-da və ya veb hostinqdə birbaşa nisbi yol işləyir)
+        const API_BASE = (window.location.protocol.startsWith('http') && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1'))
+            ? ''
+            : (window.location.port === '3000' ? '' : 'http://localhost:3000');
 
         let currentUser = null;
 
@@ -1353,7 +1353,23 @@ if %errorlevel% neq 0 (
                     showAuthAlert(data.error || "Giriş uğursuz oldu.");
                 }
             } catch (err) {
-                showAuthAlert("Serverlə əlaqə yaradılmadı. Backend serverin işlədiyindən əmin olun (node server.js).");
+                // Əgər server əlçatan deyilsə (məsələn oflayn rejim), lokal keşdən yoxla
+                const localUsers = JSON.parse(localStorage.getItem('mahammad_local_users') || '[]');
+                const found = localUsers.find(u => u.email === email && u.password === password);
+                if (found) {
+                    showAuthAlert("Uğurla daxil oldunuz!", "success");
+                    const userObj = { id: found.id, name: found.name, email: found.email };
+                    localStorage.setItem('mahammad_token', 'local_tok_' + Date.now());
+                    localStorage.setItem('mahammad_user', JSON.stringify(userObj));
+                    currentUser = userObj;
+                    renderLoggedInState(currentUser);
+                    setTimeout(() => {
+                        closeAuthModal();
+                        showToast(`Xoş gəldiniz, ${found.name}!`);
+                    }, 800);
+                } else {
+                    showAuthAlert("Giriş uğursuz oldu. Email və ya şifrəni yoxlayın.");
+                }
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Daxil Ol";
@@ -1394,7 +1410,25 @@ if %errorlevel% neq 0 (
                     showAuthAlert(data.error || "Qeydiyyat uğursuz oldu.");
                 }
             } catch (err) {
-                showAuthAlert("Serverlə əlaqə yaradılmadı. Backend serverin işlədiyindən əmin olun (node server.js).");
+                // Lokal keş qeydiyyatı
+                const localUsers = JSON.parse(localStorage.getItem('mahammad_local_users') || '[]');
+                if (localUsers.some(u => u.email === email)) {
+                    showAuthAlert("Bu email artıq qeydiyyatdan keçib.");
+                } else {
+                    const newUser = { id: 'usr_' + Date.now(), name, email, password };
+                    localUsers.push(newUser);
+                    localStorage.setItem('mahammad_local_users', JSON.stringify(localUsers));
+                    const userObj = { id: newUser.id, name: newUser.name, email: newUser.email };
+                    localStorage.setItem('mahammad_token', 'local_tok_' + Date.now());
+                    localStorage.setItem('mahammad_user', JSON.stringify(userObj));
+                    currentUser = userObj;
+                    showAuthAlert("Qeydiyyat uğurla tamamlandı!", "success");
+                    renderLoggedInState(currentUser);
+                    setTimeout(() => {
+                        closeAuthModal();
+                        showToast(`Qeydiyyat tamamlandı! Xoş gəldiniz, ${name}!`);
+                    }, 800);
+                }
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Hesab Yarat";
