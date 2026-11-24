@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAHAMMAD // Oflayn AI & Kiber Mentor Sistemi</title>
+    <title>MAHAMMAD // Oflayn AI & Kiber Təhlil Laboratoriyası</title>
     
-    <!-- Retro Laboratoriya & Brutalist Modern Tipoqrafiya -->
+    <!-- Retro Laboratoriya Tipoqrafiyası -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ==============================================================
+        /* 
            PALİTRA: Bordo & Pistachio / Retro Laboratoriya
-           - Dərin Bordo / Şərab:   #230B12
-           - Canlı Püstə / Çay Yaşılı: #96BD56
+           - Dərin Bordo:           #230B12
+           - Canlı Püstə / Yaşıl:   #96BD56
            - İsti Vanil / Krem:     #FAF5EB
            - İsti Kərpic / Mərcan:  #E05738
-           - Kəskin Sərhədlər:      1.5px - 2px solid #230B12
-           - Brutalist Hard Shadows: 4px 4px 0px #230B12
-           ============================================================== */
+           - Kəskin Brutalist Xətt: 2px solid #230B12
+           - Sərt Kölgə:            4px 4px 0px #230B12
+        */
         :root {
             --bg-vanilla: #FAF5EB;
             --bg-surface: #FFFFFF;
@@ -37,7 +37,6 @@
             --border-thin: 1.5px solid #230B12;
             --shadow-hard: 4px 4px 0px #230B12;
             --shadow-hard-lg: 6px 6px 0px #230B12;
-            --shadow-hard-hover: 2px 2px 0px #230B12;
             
             --font-display: 'Space Grotesk', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', Consolas, monospace;
@@ -55,13 +54,12 @@
             font-family: var(--font-display);
             line-height: 1.6;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(150, 189, 86, 0.12) 0%, transparent 35%),
-                radial-gradient(circle at 90% 80%, rgba(224, 87, 56, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 10% 20%, rgba(150, 189, 86, 0.15) 0%, transparent 35%),
+                radial-gradient(circle at 90% 80%, rgba(224, 87, 56, 0.1) 0%, transparent 40%);
             background-attachment: fixed;
             padding-bottom: 5rem;
         }
 
-        /* Yuxarı Zolaq / Header */
         header {
             background-color: var(--bg-vanilla);
             border-bottom: var(--border-thick);
@@ -73,10 +71,12 @@
         .header-inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1.1rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .brand-logo {
@@ -104,8 +104,9 @@
 
         nav.header-nav {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.25rem;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav-link {
@@ -140,14 +141,72 @@
             border-radius: 50%;
         }
 
-        /* Konteyner */
+        /* Auth Nav Düymələri və İstifadəçi Kartı */
+        .auth-nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-auth-trigger {
+            background-color: var(--pistachio);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            color: var(--bordeaux);
+            font-family: var(--font-display);
+            font-size: 0.88rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-auth-trigger:hover {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--bordeaux);
+            background-color: #87ab4b;
+        }
+
+        .user-profile-badge {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--bg-surface);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            padding: 4px 10px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .user-profile-badge.active {
+            display: inline-flex;
+        }
+
+        .btn-logout-small {
+            background: transparent;
+            border: none;
+            color: var(--coral);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0 4px;
+        }
+
+        .btn-logout-small:hover {
+            color: #b5381d;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        /* Hero Bölməsi (Retro Laboratoriya Vitrini) */
+        /* Hero */
         .hero {
             padding: 5rem 0 4rem;
             display: grid;
@@ -197,7 +256,6 @@
             max-width: 580px;
         }
 
-        /* Fəaliyyət Düymələri */
         .hero-actions {
             display: flex;
             gap: 1.25rem;
@@ -227,7 +285,7 @@
 
         .btn-primary:hover {
             transform: translate(2px, 2px);
-            box-shadow: var(--shadow-hard-hover);
+            box-shadow: 2px 2px 0px var(--bordeaux);
             background-color: #cb4c2e;
         }
 
@@ -239,18 +297,17 @@
 
         .btn-secondary:hover {
             transform: translate(2px, 2px);
-            box-shadow: var(--shadow-hard-hover);
+            box-shadow: 2px 2px 0px var(--bordeaux);
             background-color: var(--pistachio-pale);
         }
 
-        /* Hero Sağ Panel (Retro Metrik Paneli) */
+        /* Hero Sağ Pasport Kartı */
         .hero-spec-card {
             background-color: var(--bordeaux);
             color: var(--bg-vanilla);
             border: var(--border-thick);
             box-shadow: var(--shadow-hard-lg);
             padding: 2rem;
-            position: relative;
         }
 
         .spec-card-header {
@@ -283,7 +340,7 @@
             color: var(--pistachio);
         }
 
-        /* Ümumi Bölmə Başlıqları */
+        /* Bölmə Başlıqları */
         .section-title-wrap {
             margin: 4.5rem 0 2.5rem;
             display: flex;
@@ -313,7 +370,7 @@
             padding: 4px 10px;
         }
 
-        /* 1. İNTERAKTİV LOKAL UYĞUNLUQ YOXLAYICISI (Hardware Simulator) */
+        /* 1. İnteraktiv Lokal Uyğunluq Yoxlayıcısı */
         .checker-box {
             background-color: var(--bg-surface);
             border: var(--border-thick);
@@ -362,10 +419,7 @@
             transition: all 0.1s ease;
         }
 
-        .select-btn:hover {
-            background-color: #F0E6D2;
-        }
-
+        .select-btn:hover { background-color: #F0E6D2; }
         .select-btn.active {
             background-color: var(--bordeaux);
             color: var(--bg-vanilla);
@@ -373,7 +427,6 @@
             box-shadow: none;
         }
 
-        /* Nəticə Göstərici Paneli */
         .checker-result-panel {
             background-color: var(--pistachio-pale);
             border: var(--border-thick);
@@ -389,9 +442,6 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--bordeaux);
-            display: flex;
-            align-items: center;
-            gap: 10px;
             margin-bottom: 0.5rem;
         }
 
@@ -400,14 +450,13 @@
             background-color: #D3E0BF;
             border: var(--border-thin);
             margin: 1rem 0;
-            position: relative;
             overflow: hidden;
         }
 
         .speed-meter-fill {
             height: 100%;
             background-color: var(--coral);
-            width: 75%;
+            width: 70%;
             transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -421,7 +470,7 @@
             border-top: 1px dashed rgba(35, 11, 18, 0.3);
         }
 
-        /* 2. İNTERAKTİV İSTİFADƏ SSENARİLƏRİ (Tabs & Live Output) */
+        /* 2. Ssenarilər */
         .scenarios-container {
             background-color: var(--bg-surface);
             border: var(--border-thick);
@@ -448,13 +497,9 @@
             color: var(--bordeaux);
             cursor: pointer;
             text-align: center;
-            transition: all 0.15s;
         }
 
-        .scenario-tab-btn:last-child {
-            border-right: none;
-        }
-
+        .scenario-tab-btn:last-child { border-right: none; }
         .scenario-tab-btn.active {
             background-color: var(--bg-surface);
             color: var(--coral);
@@ -502,7 +547,7 @@
             font-size: 0.85rem;
         }
 
-        /* 3. CANLI BAT SKRİPT BAXIŞI VƏ KOPYALAMA */
+        /* 3. Skript Baxışı */
         .script-preview-card {
             background-color: var(--bg-surface);
             border: var(--border-thick);
@@ -530,13 +575,11 @@
             font-weight: 700;
             color: var(--bordeaux);
             cursor: pointer;
-            transition: all 0.1s;
         }
 
         .btn-copy:hover {
             transform: translate(1px, 1px);
             box-shadow: none;
-            background-color: #87ab4b;
         }
 
         .code-box {
@@ -551,7 +594,7 @@
             line-height: 1.5;
         }
 
-        /* 4. 3 ADDIMLI QURAŞDIRMA BÖLMƏSİ */
+        /* 4. 3 Addım */
         .steps-brutal-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -564,9 +607,6 @@
             border: var(--border-thick);
             box-shadow: var(--shadow-hard);
             padding: 1.75rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
 
         .step-index-pill {
@@ -580,19 +620,204 @@
             margin-bottom: 1rem;
         }
 
-        .step-brutal-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
+        /* MODALLAR (Login / Register & Soft-Gate) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(35, 11, 18, 0.7);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1.5rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background-color: var(--bg-vanilla);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard-lg);
+            width: 100%;
+            max-width: 440px;
+            padding: 2.25rem;
+            position: relative;
+            animation: modalPop 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.92); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.25rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--bordeaux);
+            cursor: pointer;
+        }
+
+        .modal-tabs {
+            display: flex;
+            border-bottom: var(--border-thick);
+            margin-bottom: 1.75rem;
+        }
+
+        .modal-tab {
+            flex: 1;
+            padding: 10px 0;
+            background: transparent;
+            border: none;
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+        }
+
+        .modal-tab.active {
+            color: var(--coral);
+            border-bottom: 3px solid var(--coral);
+        }
+
+        .modal-form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .modal-form-group label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
             color: var(--bordeaux);
         }
 
-        .step-brutal-card p {
+        .modal-input {
+            width: 100%;
+            background-color: var(--bg-surface);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            padding: 11px 14px;
+            font-family: var(--font-display);
             font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.55;
+            color: var(--bordeaux);
+            outline: none;
+            transition: all 0.15s;
         }
 
-        /* Bildiriş Toast */
+        .modal-input:focus {
+            box-shadow: 3px 3px 0px var(--coral);
+            border-color: var(--coral);
+        }
+
+        .modal-btn-submit {
+            width: 100%;
+            background-color: var(--bordeaux);
+            color: var(--bg-vanilla);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            padding: 12px;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: all 0.15s;
+        }
+
+        .modal-btn-submit:hover {
+            background-color: var(--coral);
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+        }
+
+        .modal-alert {
+            display: none;
+            padding: 8px 12px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            margin-bottom: 1rem;
+            border: var(--border-thin);
+        }
+
+        .modal-alert.error {
+            display: block;
+            background-color: var(--coral-pale);
+            color: var(--coral);
+            border-color: var(--coral);
+        }
+
+        .modal-alert.success {
+            display: block;
+            background-color: var(--pistachio-pale);
+            color: #215c27;
+            border-color: var(--pistachio);
+        }
+
+        /* Soft Gate Download Modal */
+        .soft-gate-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-gate-guest {
+            flex: 1;
+            background-color: var(--bg-surface);
+            border: var(--border-thin);
+            box-shadow: var(--shadow-hard);
+            color: var(--bordeaux);
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 12px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-gate-guest:hover {
+            background-color: var(--sand-muted);
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+        }
+
+        .btn-gate-login {
+            flex: 1;
+            background-color: var(--coral);
+            border: var(--border-thin);
+            box-shadow: var(--shadow-hard);
+            color: #FFFFFF;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 12px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-gate-login:hover {
+            background-color: #cb4c2e;
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+        }
+
+        /* Toast Bildiriş */
         .toast-brutal {
             position: fixed;
             bottom: 2rem;
@@ -603,41 +828,25 @@
             box-shadow: var(--shadow-hard-lg);
             padding: 1.25rem 1.75rem;
             font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 12px;
             transform: translateY(160%);
-            transition: transform 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            transition: transform 0.25s ease;
             z-index: 999;
         }
 
-        .toast-brutal.show {
-            transform: translateY(0);
-        }
+        .toast-brutal.show { transform: translateY(0); }
 
-        /* Footer */
         footer {
             border-top: var(--border-thick);
             padding: 3rem 0 1rem;
             margin-top: 4rem;
-        }
-
-        .footer-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
             font-family: var(--font-mono);
             font-size: 0.85rem;
             color: var(--text-muted);
         }
 
-        /* Responsive */
         @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; gap: 2.5rem; }
-            .hero h1 { font-size: 2.7rem; }
-            .checker-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .hero { grid-template-columns: 1fr; }
+            .checker-grid { grid-template-columns: 1fr; }
             .scenario-tabs { grid-template-columns: 1fr 1fr; }
             .scenario-content { grid-template-columns: 1fr; }
             .steps-brutal-grid { grid-template-columns: 1fr; }
@@ -646,7 +855,7 @@
 </head>
 <body>
 
-    <!-- Yuxarı Menyu -->
+    <!-- Header / Navbar -->
     <header>
         <div class="header-inner">
             <a href="#" class="brand-logo">
@@ -656,10 +865,25 @@
             <nav class="header-nav">
                 <a href="#checker" class="nav-link">Uyğunluq Testi</a>
                 <a href="#scenarios" class="nav-link">Ssenarilər</a>
-                <a href="#script" class="nav-link">Skript Baxışı</a>
+                <a href="#script" class="nav-link">Skript</a>
                 <div class="nav-status">
                     <span class="status-dot"></span>
                     <span>100% Oflayn</span>
+                </div>
+
+                <!-- Auth Bölməsi -->
+                <div class="auth-nav-wrapper">
+                    <!-- Giriş Edilməyəndə -->
+                    <button class="btn-auth-trigger" id="btnAuthTrigger" onclick="openAuthModal('login')">
+                        Daxil ol / Qeydiyyat
+                    </button>
+
+                    <!-- Giriş Ediləndə -->
+                    <div class="user-profile-badge" id="userBadge">
+                        <span>👤</span>
+                        <span id="badgeUserName">İstifadəçi</span>
+                        <button class="btn-logout-small" onclick="handleLogout()">[Çıxış]</button>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -667,20 +891,16 @@
 
     <main class="container">
 
-        <!-- Hero Bölməsi -->
+        <!-- Hero -->
         <section class="hero">
             <div>
-                <div class="hero-stamp">
-                    ⚡ Retrolab Məxfilik Mühiti • Şəbəkəsiz
-                </div>
-                <h1>
-                    Kompüterinizin daxilində <span class="highlight-pistachio">özəl düşüncə</span> laboratoriyası.
-                </h1>
+                <div class="hero-stamp">⚡ Retro-Laboratoriya • 100% Məxfi</div>
+                <h1>Kompüterinizin daxilində <span class="highlight-pistachio">özəl düşüncə</span> laboratoriyası.</h1>
                 <p class="hero-desc">
                     Ollama üzərində optimallaşdırılmış <strong>mahammad</strong> oflayn modeli. Heç bir buluda sorğu getmir, internet tələb olunmur, kiber-analiz və mentorluq birbaşa yerli aparatınızda icra edilir.
                 </p>
                 <div class="hero-actions">
-                    <button class="btn-brutal btn-primary" onclick="downloadBatFile()">
+                    <button class="btn-brutal btn-primary" onclick="initiateDownload()">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                             <polyline points="7 10 12 15 17 10"/>
@@ -688,13 +908,10 @@
                         </svg>
                         Windows üçün Yüklə (.bat)
                     </button>
-                    <a href="#checker" class="btn-brutal btn-secondary">
-                        ⚡ Sistemimi Yoxla
-                    </a>
+                    <a href="#checker" class="btn-brutal btn-secondary">⚡ Sistemimi Yoxla</a>
                 </div>
             </div>
 
-            <!-- Sağ Panel: Model Texniki Pasportu -->
             <div class="hero-spec-card">
                 <div class="spec-card-header">
                     <span>TEXNİKİ PASPORT</span>
@@ -723,7 +940,7 @@
             </div>
         </section>
 
-        <!-- 1. İNTERAKTİV LOKAL UYĞUNLUQ YOXLAYICISI -->
+        <!-- 1. İnteraktiv Lokal Uyğunluq Yoxlayıcısı -->
         <section id="checker">
             <div class="section-title-wrap">
                 <h2 class="section-title">Lokal Uyğunluq Laboratoriyası</h2>
@@ -733,7 +950,6 @@
             <div class="checker-box">
                 <div class="checker-grid">
                     <div>
-                        <!-- RAM Seçimi -->
                         <div class="checker-control-group">
                             <label class="control-label">1. Kompüterinizin RAM Həcmi:</label>
                             <div class="button-selector-group" id="ramGroup">
@@ -744,7 +960,6 @@
                             </div>
                         </div>
 
-                        <!-- Prosessor / GPU Seçimi -->
                         <div class="checker-control-group">
                             <label class="control-label">2. Hesablama Qurğunuz (Prosessor / GPU):</label>
                             <div class="button-selector-group" id="gpuGroup">
@@ -754,36 +969,29 @@
                                 <button class="select-btn" onclick="setGpu('apple', this)">Apple M-Series</button>
                             </div>
                         </div>
-
-                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 1rem;">
-                            📌 Bu alət seçdiyiniz texniki göstəricilərə əsasən <code>mahammad</code> modelinin cihazınızda generasiya sürətini və tövsiyə olunan iş rejimini real vaxtda hesablayır.
-                        </p>
                     </div>
 
-                    <!-- Canlı Nəticə Göstəricisi -->
                     <div class="checker-result-panel">
                         <div>
-                            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Gözlənilən Performans Səviyyəsi:</span>
+                            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700;">GÖZLƏNİLƏN PERFORMANS:</span>
                             <div class="result-speed-badge" id="speedRating">⚡ Rəvan və Təbii (~18 tok/s)</div>
-                            
                             <div class="speed-meter-track">
                                 <div class="speed-meter-fill" id="speedMeter"></div>
                             </div>
                         </div>
-
                         <div class="result-details" id="recommendationText">
-                            <strong>Analiz:</strong> 8 GB RAM və CPU konfiqurasiyası oflayn iş üçün kifayətdir. Model dərhal cavab verəcək, sisteminizdə heç bir donma və ya gecikmə müşahidə olunmayacaq.
+                            <strong>Analiz:</strong> 8 GB RAM və CPU konfiqurasiyası oflayn iş üçün kifayətdir. Model dərhal cavab verəcək, donma müşahidə olunmayacaq.
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 2. İNTERAKTİV İSTİFADƏ SSENARİLƏRİ -->
+        <!-- 2. Ssenarilər -->
         <section id="scenarios">
             <div class="section-title-wrap">
                 <h2 class="section-title">Canlı İstifadə Ssenariləri</h2>
-                <span class="section-pill">MODELİN DÜŞÜNCƏ TƏRZİ</span>
+                <span class="section-pill">MODELİN CAVAB TƏRZİ</span>
             </div>
 
             <div class="scenarios-container">
@@ -796,24 +1004,24 @@
 
                 <div class="scenario-content">
                     <div class="scenario-prompt-box">
-                        <h4>İstifadəçinin Sualı / Sorğusu:</h4>
+                        <h4>İstifadəçinin Sualı:</h4>
                         <p id="scenarioPrompt">
-                            "Parametrdə ID dəyərini dəyişəndə başqa istifadəçinin fakturası görünür. Bu zəiflik nədir və necə istismar edilmədən qorunmalıdır?"
+                            "Parametrdə ID dəyərini dəyişəndə başqa istifadəçinin fakturası görünür. Bu zəiflik nədir və necə qorunmalıyıq?"
                         </p>
                     </div>
                     <div class="scenario-output-box">
-                        <h4>Mahammad AI Mentor Cavabı (Yerli Hesablama):</h4>
+                        <h4>Mahammad AI Cavabı (Lokal):</h4>
                         <div id="scenarioOutput">
-                            Təsvir etdiyiniz vəziyyət <strong>IDOR (Insecure Direct Object Reference)</strong> və ya BOLA zəifliyidir.<br><br>
+                            Təsvir etdiyiniz vəziyyət <strong>IDOR (Insecure Direct Object Reference)</strong> zəifliyidir.<br><br>
                             Kök səbəb: Server istifadəçinin sessiya hüququnu yoxlamadan birbaşa obyekt ID-sinə güvənir.<br><br>
-                            💡 <em>Həll Yolu:</em> Obyektə daxil olmazdan əvvəl tətbiq qatında sessiyaya sahib olan istifadəçinin məhz həmin sənədə icazəsi olub-olmadığını yoxlayan avtorizasiya filtri tətbiq edin.
+                            💡 <em>Həll:</em> Obyektə daxil olmazdan əvvəl tətbiq qatında cari istifadəçinin məhz həmin sənədə icazəsi olub-olmadığını yoxlayan avtorizasiya filtri tətbiq edin.
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 3. CANLI BAT SKRİPT BAXIŞI VƏ KOPYALAMA -->
+        <!-- 3. Skript Baxışı -->
         <section id="script">
             <div class="section-title-wrap">
                 <h2 class="section-title">Başladıcı Skript Baxışı (qurasdir.bat)</h2>
@@ -822,14 +1030,11 @@
 
             <div class="script-preview-card">
                 <div class="script-header-bar">
-                    <div style="font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700;">
-                        📄 Fayl: <code>qurasdir.bat</code> (Windows Əmr Skripti)
+                    <div style="font-family: var(--font-mono); font-weight: 700;">
+                        📄 Fayl: <code>qurasdir.bat</code>
                     </div>
-                    <button class="btn-copy" onclick="copyBatCode()">
-                        📋 Kodu Kopyala
-                    </button>
+                    <button class="btn-copy" onclick="copyBatCode()">📋 Kodu Kopyala</button>
                 </div>
-
                 <pre class="code-box" id="batCodeText"><code>@echo off
 chcp 65001 >nul
 title Mahammad Offline AI - Qurasdirici ve Basladici
@@ -886,7 +1091,7 @@ if %errorlevel% neq 0 (
             </div>
         </section>
 
-        <!-- 4. 3 ADDIMLI QURAŞDIRMA -->
+        <!-- 4. 3 Addımlı İşə Salma -->
         <section>
             <div class="section-title-wrap">
                 <h2 class="section-title">3 Addımlı İşə Salma</h2>
@@ -895,67 +1100,355 @@ if %errorlevel% neq 0 (
 
             <div class="steps-brutal-grid">
                 <div class="step-brutal-card">
-                    <div>
-                        <div class="step-index-pill">01 / YÜKLƏ</div>
-                        <h3>Skripti Əldə Edin</h3>
-                        <p>Yuxarıdakı "Yüklə" düyməsinə klikləyərək <code>qurasdir.bat</code> faylını kompüterinizə endirin.</p>
-                    </div>
+                    <div class="step-index-pill">01 / YÜKLƏ</div>
+                    <h3>Skripti Əldə Edin</h3>
+                    <p>Yuxarıdakı "Yüklə" düyməsinə klikləyərək <code>qurasdir.bat</code> faylını kompüterinizə endirin.</p>
                 </div>
-
                 <div class="step-brutal-card">
-                    <div>
-                        <div class="step-index-pill">02 / İŞƏ SAL</div>
-                        <h3>İki Dəfə Klikləyin</h3>
-                        <p>Fayl Ollama-nı yoxlayacaq. Əgər yoxdursa, avtomatik yükləmə səhifəsini açaraq sizi istiqamətləndirəcək.</p>
-                    </div>
+                    <div class="step-index-pill">02 / İŞƏ SAL</div>
+                    <h3>İki Dəfə Klikləyin</h3>
+                    <p>Fayl Ollama-nı yoxlayır. Yoxdursa, rəsmi yükləmə səhifəsini açıb sizi istiqamətləndirir.</p>
                 </div>
-
                 <div class="step-brutal-card">
-                    <div>
-                        <div class="step-index-pill">03 / DANIŞ</div>
-                        <h3>Oflayn Düşüncə</h3>
-                        <p>Terminal pəncərəsində <strong>mahammad</strong> modeli açılır və tamamilə internetdən kənar işə başlayır.</p>
-                    </div>
+                    <div class="step-index-pill">03 / SÖHBƏT</div>
+                    <h3>Oflayn Düşüncə</h3>
+                    <p>Terminal pəncərəsində <strong>mahammad</strong> modeli açılır və tamamilə internetdən kənar işə başlayır.</p>
                 </div>
             </div>
         </section>
 
     </main>
 
+    <!-- MODAL 1: Login & Qeydiyyat Modalı -->
+    <div class="modal-overlay" id="authModalOverlay" onclick="handleOverlayClick(event, 'authModalOverlay')">
+        <div class="modal-card">
+            <button class="modal-close-btn" onclick="closeAuthModal()">✕</button>
+            
+            <div class="modal-tabs">
+                <button class="modal-tab active" id="tabLogin" onclick="switchAuthTab('login')">Daxil Ol</button>
+                <button class="modal-tab" id="tabRegister" onclick="switchAuthTab('register')">Qeydiyyat</button>
+            </div>
+
+            <div class="modal-alert" id="authAlertBox"></div>
+
+            <!-- Giriş Formu -->
+            <form id="formLogin" onsubmit="submitLogin(event)">
+                <div class="modal-form-group">
+                    <label>Email Ünvanı:</label>
+                    <input type="email" class="modal-input" id="loginEmail" placeholder="adiniz@example.com" required>
+                </div>
+                <div class="modal-form-group">
+                    <label>Şifrə:</label>
+                    <input type="password" class="modal-input" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="modal-btn-submit" id="btnLoginSubmit">Daxil Ol</button>
+            </form>
+
+            <!-- Qeydiyyat Formu -->
+            <form id="formRegister" style="display: none;" onsubmit="submitRegister(event)">
+                <div class="modal-form-group">
+                    <label>Ad və Soyad:</label>
+                    <input type="text" class="modal-input" id="regName" placeholder="Məhəmməd Əliyev" required>
+                </div>
+                <div class="modal-form-group">
+                    <label>Email Ünvanı:</label>
+                    <input type="email" class="modal-input" id="regEmail" placeholder="adiniz@example.com" required>
+                </div>
+                <div class="modal-form-group">
+                    <label>Şifrə (minimum 6 simvol):</label>
+                    <input type="password" class="modal-input" id="regPassword" placeholder="••••••••" minlength="6" required>
+                </div>
+                <button type="submit" class="modal-btn-submit" id="btnRegisterSubmit">Hesab Yarat</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: Soft-Gate Yükləmə Təklifi Modalı -->
+    <div class="modal-overlay" id="softGateOverlay" onclick="handleOverlayClick(event, 'softGateOverlay')">
+        <div class="modal-card">
+            <button class="modal-close-btn" onclick="closeSoftGate()">✕</button>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--coral); font-weight: 700; margin-bottom: 0.5rem;">
+                📦 QURAŞDIRICI SKRİPT
+            </div>
+            <h3 style="font-size: 1.4rem; color: var(--bordeaux); margin-bottom: 0.75rem;">
+                Daxil olaraq davam etmək istərdinizmi?
+            </h3>
+            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.55;">
+                Hesabınıza daxil olduqda gələcəkdə fərdi model qeydlərinizi və tənzimləmələrinizi lokal sinxronlaşdıra bilərsiniz. İstəsəniz, qonaq kimi də dərhal yükləyə bilərsiniz.
+            </p>
+
+            <div class="soft-gate-buttons">
+                <button class="btn-gate-guest" onclick="proceedGuestDownload()">
+                    Qonaq Kimi Yüklə
+                </button>
+                <button class="btn-gate-login" onclick="openLoginFromGate()">
+                    Daxil Ol / Qeydiyyat
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bildiriş Toast -->
     <div class="toast-brutal" id="toastNotice">
         <span>✓ qurasdir.bat uğurla kompüterinizə yükləndi!</span>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <div class="container footer-flex">
+        <div class="container" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
             <div>MAHAMMAD OFFLINE AI • RETRO LABORATORY EDITION</div>
             <div>AIR-GAPPED // NO CLOUD // ZERO TRACKING</div>
         </div>
     </footer>
 
-    <!-- JavaScript Məntiqi -->
+    <!-- JavaScript Məntiqi (Backend API & UI İnteqrasiyası) -->
     <script>
-        // 1. qurasdir.bat Yükləmə Funksiyası (Blob)
-        function downloadBatFile() {
+        // API Base URL (Əgər Node.js serverdən açılıbsa nisbi, birbaşa fayldan açılıbsa http://localhost:3000)
+        const API_BASE = (window.location.protocol.startsWith('http') && window.location.port === '3000') 
+            ? '' 
+            : 'http://localhost:3000';
+
+        let currentUser = null;
+
+        // Səhifə yüklənəndə sessiyanı yoxla
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuthSession();
+        });
+
+        // 1. Auth Sessiya Yoxlanışı (GET /api/me)
+        async function checkAuthSession() {
+            const token = localStorage.getItem('mahammad_token');
+            if (!token) {
+                renderLoggedOutState();
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/api/me`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    currentUser = data.user;
+                    renderLoggedInState(currentUser);
+                } else {
+                    // Token etibarsızdırsa təmizlə
+                    localStorage.removeItem('mahammad_token');
+                    localStorage.removeItem('mahammad_user');
+                    renderLoggedOutState();
+                }
+            } catch (err) {
+                // Server sönülüdürsə lokal saxlanmış istifadəçini göstər
+                const savedUser = localStorage.getItem('mahammad_user');
+                if (savedUser) {
+                    currentUser = JSON.parse(savedUser);
+                    renderLoggedInState(currentUser);
+                } else {
+                    renderLoggedOutState();
+                }
+            }
+        }
+
+        function renderLoggedInState(user) {
+            document.getElementById('btnAuthTrigger').style.display = 'none';
+            const badge = document.getElementById('userBadge');
+            badge.classList.add('active');
+            document.getElementById('badgeUserName').innerText = user.name || user.email;
+        }
+
+        function renderLoggedOutState() {
+            currentUser = null;
+            document.getElementById('btnAuthTrigger').style.display = 'inline-block';
+            document.getElementById('userBadge').classList.remove('active');
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('mahammad_token');
+            localStorage.removeItem('mahammad_user');
+            renderLoggedOutState();
+            showToast("Sistemdən uğurla çıxış etdiniz.");
+        }
+
+        // 2. Modal İdarəetməsi
+        function openAuthModal(mode = 'login') {
+            closeSoftGate();
+            document.getElementById('authModalOverlay').classList.add('active');
+            switchAuthTab(mode);
+            clearAuthAlert();
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModalOverlay').classList.remove('active');
+            clearAuthAlert();
+        }
+
+        function handleOverlayClick(e, overlayId) {
+            if (e.target.id === overlayId) {
+                document.getElementById(overlayId).classList.remove('active');
+            }
+        }
+
+        function switchAuthTab(tab) {
+            clearAuthAlert();
+            const tabLogin = document.getElementById('tabLogin');
+            const tabRegister = document.getElementById('tabRegister');
+            const formLogin = document.getElementById('formLogin');
+            const formRegister = document.getElementById('formRegister');
+
+            if (tab === 'login') {
+                tabLogin.classList.add('active');
+                tabRegister.classList.remove('active');
+                formLogin.style.display = 'block';
+                formRegister.style.display = 'none';
+            } else {
+                tabLogin.classList.remove('active');
+                tabRegister.classList.add('active');
+                formLogin.style.display = 'none';
+                formRegister.style.display = 'block';
+            }
+        }
+
+        function showAuthAlert(msg, type = 'error') {
+            const box = document.getElementById('authAlertBox');
+            box.className = `modal-alert ${type}`;
+            box.innerText = msg;
+        }
+
+        function clearAuthAlert() {
+            const box = document.getElementById('authAlertBox');
+            box.className = 'modal-alert';
+            box.innerText = '';
+        }
+
+        // 3. Giriş Əməliyyatı (POST /api/login)
+        async function submitLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const submitBtn = document.getElementById('btnLoginSubmit');
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Yoxlanılır...";
+
+            try {
+                const res = await fetch(`${API_BASE}/api/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    showAuthAlert("Uğurla daxil oldunuz!", "success");
+                    localStorage.setItem('mahammad_token', data.token);
+                    localStorage.setItem('mahammad_user', JSON.stringify(data.user));
+                    currentUser = data.user;
+                    renderLoggedInState(currentUser);
+                    setTimeout(() => {
+                        closeAuthModal();
+                        showToast(`Xoş gəldiniz, ${data.user.name}!`);
+                    }, 800);
+                } else {
+                    showAuthAlert(data.error || "Giriş uğursuz oldu.");
+                }
+            } catch (err) {
+                showAuthAlert("Serverlə əlaqə yaradılmadı. Backend serverin işlədiyindən əmin olun (node server.js).");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Daxil Ol";
+            }
+        }
+
+        // 4. Qeydiyyat Əməliyyatı (POST /api/register)
+        async function submitRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const submitBtn = document.getElementById('btnRegisterSubmit');
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Qeydiyyat aparılır...";
+
+            try {
+                const res = await fetch(`${API_BASE}/api/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    showAuthAlert("Qeydiyyat uğurla tamamlandı!", "success");
+                    localStorage.setItem('mahammad_token', data.token);
+                    localStorage.setItem('mahammad_user', JSON.stringify(data.user));
+                    currentUser = data.user;
+                    renderLoggedInState(currentUser);
+                    setTimeout(() => {
+                        closeAuthModal();
+                        showToast(`Qeydiyyat tamamlandı! Xoş gəldiniz, ${data.user.name}!`);
+                    }, 800);
+                } else {
+                    showAuthAlert(data.error || "Qeydiyyat uğursuz oldu.");
+                }
+            } catch (err) {
+                showAuthAlert("Serverlə əlaqə yaradılmadı. Backend serverin işlədiyindən əmin olun (node server.js).");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Hesab Yarat";
+            }
+        }
+
+        // 5. Yükləmə Məntiqi və Soft-Gate Qapısı
+        function initiateDownload() {
+            // Əgər istifadəçi artıq daxil olubsa, birbaşa yüklə
+            if (currentUser) {
+                executeBatDownload();
+            } else {
+                // Əgər daxil olmayıbsa, yumşaq təklif modalını aç
+                document.getElementById('softGateOverlay').classList.add('active');
+            }
+        }
+
+        function closeSoftGate() {
+            document.getElementById('softGateOverlay').classList.remove('active');
+        }
+
+        function proceedGuestDownload() {
+            closeSoftGate();
+            executeBatDownload();
+        }
+
+        function openLoginFromGate() {
+            closeSoftGate();
+            openAuthModal('login');
+        }
+
+        // .bat Faylını Fiziki Və Ya Blob İlə Yükləmək
+        function executeBatDownload() {
+            // Əvvəlcə qovluqdakı mövcud qurasdir.bat faylını çağırmağa cəhd et, fallback olaraq Blob yarat
+            const link = document.createElement('a');
+            link.href = 'qurasdir.bat';
+            link.download = 'qurasdir.bat';
+            
+            // Xəta halında Blob ilə generasiya et
             const rawCode = document.getElementById('batCodeText').innerText;
             const formatted = rawCode.replace(/\n/g, '\r\n');
-            const blob = new Blob([formatted], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'qurasdir.bat';
+            const blob = new Blob([formatted], { type: 'application/octet-stream;charset=utf-8' });
+            const blobUrl = URL.createObjectURL(blob);
+
+            link.href = blobUrl;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            URL.revokeObjectURL(url);
+            setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
 
-            showToast("✓ qurasdir.bat yükləndi! Faylı açıb AI-ı başladın.");
+            showToast("✓ qurasdir.bat endirildi! İki dəfə klikləyərək işə salın.");
         }
 
-        // 2. Kodu Kopyalama
+        // 6. Kodu Kopyalama
         function copyBatCode() {
             const code = document.getElementById('batCodeText').innerText;
             navigator.clipboard.writeText(code).then(() => {
@@ -969,10 +1462,10 @@ if %errorlevel% neq 0 (
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3800);
+            }, 3500);
         }
 
-        // 3. Lokal Uyğunluq Yoxlayıcısı Məntiqi
+        // 7. Lokal Uyğunluq Yoxlayıcısı
         let currentRam = 8;
         let currentGpu = 'cpu';
 
@@ -998,59 +1491,53 @@ if %errorlevel% neq 0 (
             if (currentGpu === 'rtx' && currentRam >= 16) {
                 speedEl.innerHTML = "🔥 Ekstremal Sürət (~55 tok/s)";
                 meterEl.style.width = "98%";
-                meterEl.style.backgroundColor = "#96BD56";
-                recEl.innerHTML = "<strong>Mükəmməl Konfiqurasiya:</strong> Model tamamilə RTX video kartınızın VRAM yaddaşına köçürüləcək. Cavablar göz qırpımında, real vaxtda generasiya olunacaq.";
+                recEl.innerHTML = "<strong>Mükəmməl Konfiqurasiya:</strong> Model tamamilə RTX kartının VRAM-ına yüklənəcək. Cavablar göz qırpımında generasiya olunacaq.";
             } 
             else if (currentGpu === 'apple') {
                 speedEl.innerHTML = "⚡ Çox Sürətli (~40 tok/s)";
                 meterEl.style.width = "85%";
-                meterEl.style.backgroundColor = "#96BD56";
-                recEl.innerHTML = "<strong>Apple Metal Dəstəyi:</strong> Vahid yaddaş arxitekturası sayəsində prosessor və qrafik nüvələr yüksək ötürücülük təmin edir.";
+                recEl.innerHTML = "<strong>Apple Metal Dəstəyi:</strong> Vahid yaddaş arxitekturası sayəsində yüksək ötürücülük təmin olunur.";
             }
             else if (currentGpu === 'gtx' || (currentGpu === 'cpu' && currentRam >= 16)) {
                 speedEl.innerHTML = "⚡ Rəvan və Təbii (~22 tok/s)";
                 meterEl.style.width = "68%";
-                meterEl.style.backgroundColor = "#E05738";
-                recEl.innerHTML = "<strong>Çox Yaxşı:</strong> Gündəlik təhlil, kod yoxlanışı və kiber mentorluq üçün tam idealdır. Sürət oxuma tempinizdən daha sürətli olacaq.";
+                recEl.innerHTML = "<strong>Çox Yaxşı:</strong> Gündəlik təhlil və kiber mentorluq üçün tam idealdır. Sürət oxuma tempindən daha sürətlidir.";
             }
             else if (currentRam === 8) {
                 speedEl.innerHTML = "🟢 Rahat İşləmə (~15 tok/s)";
                 meterEl.style.width = "50%";
-                meterEl.style.backgroundColor = "#E05738";
-                recEl.innerHTML = "<strong>Stabil və Kifayət:</strong> 8 GB RAM modelin CPU rejimində rahat işləməsi üçün yetərlidir. Arxa fonda ağır proqramları bağlamaq tövsiyə olunur.";
+                recEl.innerHTML = "<strong>Stabil və Kifayət:</strong> 8 GB RAM modelin CPU rejimində rahat işləməsi üçün yetərlidir.";
             }
             else {
                 speedEl.innerHTML = "🟡 Orta / Ehtiyatlı (~6 tok/s)";
                 meterEl.style.width = "25%";
-                meterEl.style.backgroundColor = "#E05738";
-                recEl.innerHTML = "<strong>Diqqət:</strong> 4 GB RAM ilə model işləyə bilər, lakin cavablar bir qədər yavaş ola bilər. Yaddaşı 8 GB-a yüksəltmək daha rəvan təcrübə bəxş edər.";
+                recEl.innerHTML = "<strong>Diqqət:</strong> 4 GB RAM ilə model işləyə bilər, lakin cavablar bir qədər gecikə bilər. 8 GB tövsiyə olunur.";
             }
         }
 
-        // 4. Ssenarilər Məntiqi
+        // 8. Ssenarilər Məntiqi
         const scenarioData = [
             {
                 q: '"Parametrdə ID dəyərini dəyişəndə başqa istifadəçinin fakturası görünür. Bu zəiflik nədir və necə qorunmalıyıq?"',
-                a: 'Təsvir etdiyiniz vəziyyət <strong>IDOR (Insecure Direct Object Reference)</strong> zəifliyidir.<br><br>Kök səbəb: Server istifadəçinin sessiya hüququnu yoxlamadan birbaşa obyekt ID-sinə güvənir.<br><br>💡 <em>Tövsiyə:</em> Obyektə daxil olmazdan əvvəl tətbiq qatında cari istifadəçinin məhz həmin resursa hüququ olub-olmadığını yoxlayan avtorizasiya filtri tətbiq edin.'
+                a: 'Təsvir etdiyiniz vəziyyət <strong>IDOR (Insecure Direct Object Reference)</strong> zəifliyidir.<br><br>Kök səbəb: Server istifadəçinin sessiya hüququnu yoxlamadan birbaşa obyekt ID-sinə güvənir.<br><br>💡 <em>Həll:</em> Obyektə daxil olmazdan əvvəl tətbiq qatında cari istifadəçinin məhz həmin sənədə icazəsi olub-olmadığını yoxlayan avtorizasiya filtri tətbiq edin.'
             },
             {
                 q: '"Flask tətbiqimdə istifadəçidən gələn adı render_template_string ilə göstərirəm. Təhlükə varmı?"',
-                a: 'Bəli, burada ciddi <strong>SSTI (Server-Side Template Injection)</strong> riski mövcuddur.<br><br>İstifadəçi adı <code>{{ 7*7 }}</code> və ya sistem əmrlərini icra edən Jinja2 payload-ları daxil edərsə, serverinizdə kod icra edə bilər.<br><br>💡 <em>Tövsiyə:</em> <code>render_template_string</code> yerinə şablon fayllarından istifadə edin və dəyişənləri parametr kimi ötürün.'
+                a: 'Bəli, burada ciddi <strong>SSTI (Server-Side Template Injection)</strong> riski mövcuddur.<br><br>İstifadəçi adı <code>{{ 7*7 }}</code> daxil edərsə, serverinizdə icra oluna bilər.<br><br>💡 <em>Həll:</em> Şablon fayllarından istifadə edin və dəyişənləri parametr kimi ötürün.'
             },
             {
                 q: '"Mənə birbaşa SQL injection exploit-i ver, dərhal saytı sındırım."',
-                a: 'Mən hazır hücum skripti və ya zərərli exploit təqdim etmirəm.<br><br>Lakin sizə zəifliyin mexanizmini izah edə bilərəm: Niyə parametr bazaya ötürüləndə məlumat və əmr bir-birinə qarışır? <br><br>Gəlin əvvəlcə Prepared Statements (parametrləşdirilmiş sorğular) məntiqinə nəzər salaq.'
+                a: 'Mən hazır hücum skripti təqdim etmirəm.<br><br>Lakin zəifliyin kök mexanizmini izah edə bilərəm: Niyə parametr bazaya ötürüləndə məlumat və əmr qarışır? Gəlin Prepared Statements məntiqinə nəzər salaq.'
             },
             {
-                q: '"Şirkətimizin daxili audit sənədini analiz etmək istəyirəm, amma buluda yükləməyə icazə yoxdur."',
-                a: 'Mən <strong>100% oflayn</strong> rejimdə kompüterinizdə çalışıram. Şəbəkə bağlantınız sönülü olsa belə daxili hesabatlarınızı, log fayllarınızı və qeydlərinizi tam məxfi şəkildə təhlil edə bilərsiniz. Heç bir bayt məlumat cihazınızdan kənara çıxmır.'
+                q: '"Şirkətimizin daxili audit sənədini analiz etmək istəyirəm, amma buluda yükləmək qadağandır."',
+                a: 'Mən <strong>100% oflayn</strong> işləyirəm. Şəbəkə kabeli sönülü olsa belə daxili hesabatlarınızı tam məxfi şəkildə təhlil edə bilərsiniz. Heç bir məlumat kompüterinizdən çıxmır.'
             }
         ];
 
         function switchScenario(idx, btn) {
             document.querySelectorAll('.scenario-tab-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
             const item = scenarioData[idx];
             document.getElementById('scenarioPrompt').innerText = item.q;
             document.getElementById('scenarioOutput').innerHTML = item.a;
