@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAHAMMAD // Oflayn AI & Kiber Mentor Sistemi</title>
+    
+    <!-- Retro Laboratoriya & Brutalist Modern Tipoqrafiya -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==============================================================
+           PALİTRA: Bordo & Pistachio / Retro Laboratoriya
+           - Dərin Bordo / Şərab:   #230B12
+           - Canlı Püstə / Çay Yaşılı: #96BD56
+           - İsti Vanil / Krem:     #FAF5EB
+           - İsti Kərpic / Mərcan:  #E05738
+           - Kəskin Sərhədlər:      1.5px - 2px solid #230B12
+           - Brutalist Hard Shadows: 4px 4px 0px #230B12
+           ============================================================== */
+        :root {
+            --bg-vanilla: #FAF5EB;
+            --bg-surface: #FFFFFF;
+            --bordeaux: #230B12;
+            --bordeaux-light: #381520;
+            --pistachio: #96BD56;
+            --pistachio-pale: #EBF2DF;
+            --coral: #E05738;
+            --coral-pale: #FAE9E5;
+            --sand-muted: #E8E0D2;
+            --text-dark: #230B12;
+            --text-muted: #615651;
+            
+            --border-thick: 2px solid #230B12;
+            --border-thin: 1.5px solid #230B12;
+            --shadow-hard: 4px 4px 0px #230B12;
+            --shadow-hard-lg: 6px 6px 0px #230B12;
+            --shadow-hard-hover: 2px 2px 0px #230B12;
+            
+            --font-display: 'Space Grotesk', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', Consolas, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-vanilla);
+            color: var(--text-dark);
+            font-family: var(--font-display);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(150, 189, 86, 0.12) 0%, transparent 35%),
+                radial-gradient(circle at 90% 80%, rgba(224, 87, 56, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+            padding-bottom: 5rem;
+        }
+
+        /* Yuxarı Zolaq / Header */
+        header {
+            background-color: var(--bg-vanilla);
+            border-bottom: var(--border-thick);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--bordeaux);
+            font-weight: 700;
+            font-size: 1.35rem;
+            letter-spacing: -0.03em;
+        }
+
+        .brand-badge {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            background-color: var(--pistachio);
+            color: var(--bordeaux);
+            padding: 2px 8px;
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        nav.header-nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .nav-link:hover {
+            border-color: var(--coral);
+        }
+
+        .nav-status {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            background: var(--bordeaux);
+            color: var(--bg-vanilla);
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background-color: var(--pistachio);
+            border-radius: 50%;
+        }
+
+        /* Konteyner */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Bölməsi (Retro Laboratoriya Vitrini) */
+        .hero {
+            padding: 5rem 0 4rem;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 3.5rem;
+            align-items: center;
+            border-bottom: var(--border-thick);
+        }
+
+        .hero-stamp {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--coral);
+            background-color: var(--coral-pale);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            padding: 4px 12px;
+            margin-bottom: 1.75rem;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 3.6rem;
+            line-height: 1.08;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            color: var(--bordeaux);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .highlight-pistachio {
+            background-color: var(--pistachio);
+            padding: 0 6px;
+            box-shadow: 3px 3px 0px var(--bordeaux);
+            display: inline-block;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            max-width: 580px;
+        }
+
+        /* Fəaliyyət Düymələri */
+        .hero-actions {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-brutal {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 14px 28px;
+            border: var(--border-thick);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--coral);
+            color: #FFFFFF;
+            box-shadow: var(--shadow-hard);
+        }
+
+        .btn-primary:hover {
+            transform: translate(2px, 2px);
+            box-shadow: var(--shadow-hard-hover);
+            background-color: #cb4c2e;
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-surface);
+            color: var(--bordeaux);
+            box-shadow: var(--shadow-hard);
+        }
+
+        .btn-secondary:hover {
+            transform: translate(2px, 2px);
+            box-shadow: var(--shadow-hard-hover);
+            background-color: var(--pistachio-pale);
+        }
+
+        /* Hero Sağ Panel (Retro Metrik Paneli) */
+        .hero-spec-card {
+            background-color: var(--bordeaux);
+            color: var(--bg-vanilla);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard-lg);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .spec-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed rgba(250, 245, 235, 0.3);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        .spec-item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.65rem 0;
+            border-bottom: 1px solid rgba(250, 245, 235, 0.12);
+            font-size: 0.95rem;
+        }
+
+        .spec-item-row span:first-child {
+            color: #C0B7A8;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+
+        .spec-item-row span:last-child {
+            font-weight: 600;
+            color: var(--pistachio);
+        }
+
+        /* Ümumi Bölmə Başlıqları */
+        .section-title-wrap {
+            margin: 4.5rem 0 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: var(--border-thick);
+            padding-bottom: 1.25rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--bordeaux);
+        }
+
+        .section-pill {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            background-color: var(--pistachio);
+            color: var(--bordeaux);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0 var(--bordeaux);
+            padding: 4px 10px;
+        }
+
+        /* 1. İNTERAKTİV LOKAL UYĞUNLUQ YOXLAYICISI (Hardware Simulator) */
+        .checker-box {
+            background-color: var(--bg-surface);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard-lg);
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .checker-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .checker-control-group {
+            margin-bottom: 1.75rem;
+        }
+
+        .control-label {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            display: block;
+            color: var(--bordeaux);
+        }
+
+        .button-selector-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .select-btn {
+            background-color: var(--bg-vanilla);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            padding: 10px 14px;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--bordeaux);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.1s ease;
+        }
+
+        .select-btn:hover {
+            background-color: #F0E6D2;
+        }
+
+        .select-btn.active {
+            background-color: var(--bordeaux);
+            color: var(--bg-vanilla);
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+
+        /* Nəticə Göstərici Paneli */
+        .checker-result-panel {
+            background-color: var(--pistachio-pale);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .result-speed-badge {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--bordeaux);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.5rem;
+        }
+
+        .speed-meter-track {
+            height: 12px;
+            background-color: #D3E0BF;
+            border: var(--border-thin);
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .speed-meter-fill {
+            height: 100%;
+            background-color: var(--coral);
+            width: 75%;
+            transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .result-details {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--bordeaux);
+            line-height: 1.6;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(35, 11, 18, 0.3);
+        }
+
+        /* 2. İNTERAKTİV İSTİFADƏ SSENARİLƏRİ (Tabs & Live Output) */
+        .scenarios-container {
+            background-color: var(--bg-surface);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard-lg);
+            margin-bottom: 4rem;
+            overflow: hidden;
+        }
+
+        .scenario-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-bottom: var(--border-thick);
+            background-color: var(--sand-muted);
+        }
+
+        .scenario-tab-btn {
+            background: transparent;
+            border: none;
+            border-right: var(--border-thin);
+            padding: 1rem;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--bordeaux);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s;
+        }
+
+        .scenario-tab-btn:last-child {
+            border-right: none;
+        }
+
+        .scenario-tab-btn.active {
+            background-color: var(--bg-surface);
+            color: var(--coral);
+            box-shadow: inset 0 -3px 0 var(--coral);
+        }
+
+        .scenario-content {
+            padding: 2.25rem;
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 2rem;
+            background-color: var(--bg-surface);
+        }
+
+        .scenario-prompt-box {
+            background-color: var(--bg-vanilla);
+            border: var(--border-thin);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-hard);
+        }
+
+        .scenario-prompt-box h4 {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 0.75rem;
+        }
+
+        .scenario-output-box {
+            background-color: var(--bordeaux);
+            color: var(--bg-vanilla);
+            border: var(--border-thick);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-hard);
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            line-height: 1.6;
+            min-height: 220px;
+        }
+
+        .scenario-output-box h4 {
+            color: var(--pistachio);
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        /* 3. CANLI BAT SKRİPT BAXIŞI VƏ KOPYALAMA */
+        .script-preview-card {
+            background-color: var(--bg-surface);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard-lg);
+            padding: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .script-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-copy {
+            background-color: var(--pistachio);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            padding: 6px 16px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--bordeaux);
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .btn-copy:hover {
+            transform: translate(1px, 1px);
+            box-shadow: none;
+            background-color: #87ab4b;
+        }
+
+        .code-box {
+            background-color: var(--bordeaux);
+            color: #F0EAD6;
+            border: var(--border-thick);
+            padding: 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            overflow-x: auto;
+            max-height: 320px;
+            line-height: 1.5;
+        }
+
+        /* 4. 3 ADDIMLI QURAŞDIRMA BÖLMƏSİ */
+        .steps-brutal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .step-brutal-card {
+            background-color: var(--bg-surface);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .step-index-pill {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--bg-vanilla);
+            background-color: var(--bordeaux);
+            padding: 2px 10px;
+            width: fit-content;
+            margin-bottom: 1rem;
+        }
+
+        .step-brutal-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--bordeaux);
+        }
+
+        .step-brutal-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        /* Bildiriş Toast */
+        .toast-brutal {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--pistachio);
+            color: var(--bordeaux);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard-lg);
+            padding: 1.25rem 1.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateY(160%);
+            transition: transform 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            z-index: 999;
+        }
+
+        .toast-brutal.show {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            border-top: var(--border-thick);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; gap: 2.5rem; }
+            .hero h1 { font-size: 2.7rem; }
+            .checker-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .scenario-tabs { grid-template-columns: 1fr 1fr; }
+            .scenario-content { grid-template-columns: 1fr; }
+            .steps-brutal-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Yuxarı Menyu -->
+    <header>
+        <div class="header-inner">
+            <a href="#" class="brand-logo">
+                MAHAMMAD
+                <span class="brand-badge">OFFAİ-01</span>
+            </a>
+            <nav class="header-nav">
+                <a href="#checker" class="nav-link">Uyğunluq Testi</a>
+                <a href="#scenarios" class="nav-link">Ssenarilər</a>
+                <a href="#script" class="nav-link">Skript Baxışı</a>
+                <div class="nav-status">
+                    <span class="status-dot"></span>
+                    <span>100% Oflayn</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Hero Bölməsi -->
+        <section class="hero">
+            <div>
+                <div class="hero-stamp">
+                    ⚡ Retrolab Məxfilik Mühiti • Şəbəkəsiz
+                </div>
+                <h1>
+                    Kompüterinizin daxilində <span class="highlight-pistachio">özəl düşüncə</span> laboratoriyası.
+                </h1>
+                <p class="hero-desc">
+                    Ollama üzərində optimallaşdırılmış <strong>mahammad</strong> oflayn modeli. Heç bir buluda sorğu getmir, internet tələb olunmur, kiber-analiz və mentorluq birbaşa yerli aparatınızda icra edilir.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn-brutal btn-primary" onclick="downloadBatFile()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Windows üçün Yüklə (.bat)
+                    </button>
+                    <a href="#checker" class="btn-brutal btn-secondary">
+                        ⚡ Sistemimi Yoxla
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sağ Panel: Model Texniki Pasportu -->
+            <div class="hero-spec-card">
+                <div class="spec-card-header">
+                    <span>TEXNİKİ PASPORT</span>
+                    <span>MODEL: mahammad</span>
+                </div>
+                <div class="spec-item-row">
+                    <span>Arxitektura Nüvəsi:</span>
+                    <span>Gemma3 / Qwen2.5</span>
+                </div>
+                <div class="spec-item-row">
+                    <span>Şəbəkə Tələbi:</span>
+                    <span>0 KB (Tam Hava Boşluğu)</span>
+                </div>
+                <div class="spec-item-row">
+                    <span>Məxfilik Səviyyəsi:</span>
+                    <span>100% Lokal Diskdə</span>
+                </div>
+                <div class="spec-item-row">
+                    <span>Əsas İxtisaslaşma:</span>
+                    <span>Kibertəhlükəsizlik & Kod Auditi</span>
+                </div>
+                <div class="spec-item-row" style="border:none;">
+                    <span>İcra Mühərriki:</span>
+                    <span>Ollama Runtime CLI</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. İNTERAKTİV LOKAL UYĞUNLUQ YOXLAYICISI -->
+        <section id="checker">
+            <div class="section-title-wrap">
+                <h2 class="section-title">Lokal Uyğunluq Laboratoriyası</h2>
+                <span class="section-pill">İNTERAKTİV SİMULYATOR</span>
+            </div>
+
+            <div class="checker-box">
+                <div class="checker-grid">
+                    <div>
+                        <!-- RAM Seçimi -->
+                        <div class="checker-control-group">
+                            <label class="control-label">1. Kompüterinizin RAM Həcmi:</label>
+                            <div class="button-selector-group" id="ramGroup">
+                                <button class="select-btn" onclick="setRam(4, this)">4 GB</button>
+                                <button class="select-btn active" onclick="setRam(8, this)">8 GB</button>
+                                <button class="select-btn" onclick="setRam(16, this)">16 GB</button>
+                                <button class="select-btn" onclick="setRam(32, this)">32 GB+</button>
+                            </div>
+                        </div>
+
+                        <!-- Prosessor / GPU Seçimi -->
+                        <div class="checker-control-group">
+                            <label class="control-label">2. Hesablama Qurğunuz (Prosessor / GPU):</label>
+                            <div class="button-selector-group" id="gpuGroup">
+                                <button class="select-btn active" onclick="setGpu('cpu', this)">Yalnız CPU</button>
+                                <button class="select-btn" onclick="setGpu('gtx', this)">GTX (4-6GB)</button>
+                                <button class="select-btn" onclick="setGpu('rtx', this)">RTX (8GB+ VRAM)</button>
+                                <button class="select-btn" onclick="setGpu('apple', this)">Apple M-Series</button>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 1rem;">
+                            📌 Bu alət seçdiyiniz texniki göstəricilərə əsasən <code>mahammad</code> modelinin cihazınızda generasiya sürətini və tövsiyə olunan iş rejimini real vaxtda hesablayır.
+                        </p>
+                    </div>
+
+                    <!-- Canlı Nəticə Göstəricisi -->
+                    <div class="checker-result-panel">
+                        <div>
+                            <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">Gözlənilən Performans Səviyyəsi:</span>
+                            <div class="result-speed-badge" id="speedRating">⚡ Rəvan və Təbii (~18 tok/s)</div>
+                            
+                            <div class="speed-meter-track">
+                                <div class="speed-meter-fill" id="speedMeter"></div>
+                            </div>
+                        </div>
+
+                        <div class="result-details" id="recommendationText">
+                            <strong>Analiz:</strong> 8 GB RAM və CPU konfiqurasiyası oflayn iş üçün kifayətdir. Model dərhal cavab verəcək, sisteminizdə heç bir donma və ya gecikmə müşahidə olunmayacaq.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. İNTERAKTİV İSTİFADƏ SSENARİLƏRİ -->
+        <section id="scenarios">
+            <div class="section-title-wrap">
+                <h2 class="section-title">Canlı İstifadə Ssenariləri</h2>
+                <span class="section-pill">MODELİN DÜŞÜNCƏ TƏRZİ</span>
+            </div>
+
+            <div class="scenarios-container">
+                <div class="scenario-tabs">
+                    <button class="scenario-tab-btn active" onclick="switchScenario(0, this)">🛡️ Zəiflik & Bug Hunting</button>
+                    <button class="scenario-tab-btn" onclick="switchScenario(1, this)">💻 Təhlükəsiz Kod Auditi</button>
+                    <button class="scenario-tab-btn" onclick="switchScenario(2, this)">🧠 Sokratik Mentorluq</button>
+                    <button class="scenario-tab-btn" onclick="switchScenario(3, this)">🔒 Məxfi Qeydlər</button>
+                </div>
+
+                <div class="scenario-content">
+                    <div class="scenario-prompt-box">
+                        <h4>İstifadəçinin Sualı / Sorğusu:</h4>
+                        <p id="scenarioPrompt">
+                            "Parametrdə ID dəyərini dəyişəndə başqa istifadəçinin fakturası görünür. Bu zəiflik nədir və necə istismar edilmədən qorunmalıdır?"
+                        </p>
+                    </div>
+                    <div class="scenario-output-box">
+                        <h4>Mahammad AI Mentor Cavabı (Yerli Hesablama):</h4>
+                        <div id="scenarioOutput">
+                            Təsvir etdiyiniz vəziyyət <strong>IDOR (Insecure Direct Object Reference)</strong> və ya BOLA zəifliyidir.<br><br>
+                            Kök səbəb: Server istifadəçinin sessiya hüququnu yoxlamadan birbaşa obyekt ID-sinə güvənir.<br><br>
+                            💡 <em>Həll Yolu:</em> Obyektə daxil olmazdan əvvəl tətbiq qatında sessiyaya sahib olan istifadəçinin məhz həmin sənədə icazəsi olub-olmadığını yoxlayan avtorizasiya filtri tətbiq edin.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. CANLI BAT SKRİPT BAXIŞI VƏ KOPYALAMA -->
+        <section id="script">
+            <div class="section-title-wrap">
+                <h2 class="section-title">Başladıcı Skript Baxışı (qurasdir.bat)</h2>
+                <span class="section-pill">AÇIQ KOD</span>
+            </div>
+
+            <div class="script-preview-card">
+                <div class="script-header-bar">
+                    <div style="font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700;">
+                        📄 Fayl: <code>qurasdir.bat</code> (Windows Əmr Skripti)
+                    </div>
+                    <button class="btn-copy" onclick="copyBatCode()">
+                        📋 Kodu Kopyala
+                    </button>
+                </div>
+
+                <pre class="code-box" id="batCodeText"><code>@echo off
+chcp 65001 >nul
+title Mahammad Offline AI - Qurasdirici ve Basladici
+color 0a
+cls
+
+echo ================================================================
+echo       🛡️  MAHAMMAD OFLAYN AI SİSTEMİ - BAŞLADICI  🛡️
+echo ================================================================
+echo [Məlumat] Bu skript 'mahammad' oflayn modelini yoxlayır və başladır.
+echo.
+
+:: 1. Sistemdə Ollama mühərriki yoxlanılır
+echo [*] 1/2: Sistemdə Ollama yoxlanılır...
+where ollama >nul 2>nul
+if %errorlevel% neq 0 (
+    color 0c
+    echo.
+    echo ================================================================
+    echo [X] XƏTA: Kompüterinizdə Ollama tapılmadı!
+    echo ================================================================
+    echo Oflayn modelin işləməsi üçün Ollama quraşdırılmalıdır.
+    echo Rəsmi yükləmə səhifəsi brauzerinizdə açılır...
+    echo.
+    timeout /t 2 >nul
+    start https://ollama.com/download/windows
+    echo Zəhmət olmasa Ollamanı qurduqdan sonra bu faylı yenidən açın.
+    echo ================================================================
+    pause
+    exit /b 1
+)
+
+echo [✓] Ollama sistemi aktivdir!
+echo [*] 2/2: 'mahammad' modeli başladılır...
+echo.
+echo ================================================================
+echo   Söhbət başladı! Çıxmaq üçün '/bye' yazıb Enter basın.
+echo ================================================================
+echo.
+
+ollama run mahammad
+
+if %errorlevel% neq 0 (
+    color 0e
+    echo.
+    echo [!] Model işə düşmədi. Yerli modellər siyahınız:
+    ollama list
+    echo.
+    echo Əgər model hələ yaradılmayıbsa:
+    echo    ollama create mahammad -f Modelfile
+    echo.
+    pause
+)</code></pre>
+            </div>
+        </section>
+
+        <!-- 4. 3 ADDIMLI QURAŞDIRMA -->
+        <section>
+            <div class="section-title-wrap">
+                <h2 class="section-title">3 Addımlı İşə Salma</h2>
+                <span class="section-pill">SÜRƏTLİ START</span>
+            </div>
+
+            <div class="steps-brutal-grid">
+                <div class="step-brutal-card">
+                    <div>
+                        <div class="step-index-pill">01 / YÜKLƏ</div>
+                        <h3>Skripti Əldə Edin</h3>
+                        <p>Yuxarıdakı "Yüklə" düyməsinə klikləyərək <code>qurasdir.bat</code> faylını kompüterinizə endirin.</p>
+                    </div>
+                </div>
+
+                <div class="step-brutal-card">
+                    <div>
+                        <div class="step-index-pill">02 / İŞƏ SAL</div>
+                        <h3>İki Dəfə Klikləyin</h3>
+                        <p>Fayl Ollama-nı yoxlayacaq. Əgər yoxdursa, avtomatik yükləmə səhifəsini açaraq sizi istiqamətləndirəcək.</p>
+                    </div>
+                </div>
+
+                <div class="step-brutal-card">
+                    <div>
+                        <div class="step-index-pill">03 / DANIŞ</div>
+                        <h3>Oflayn Düşüncə</h3>
+                        <p>Terminal pəncərəsində <strong>mahammad</strong> modeli açılır və tamamilə internetdən kənar işə başlayır.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bildiriş Toast -->
+    <div class="toast-brutal" id="toastNotice">
+        <span>✓ qurasdir.bat uğurla kompüterinizə yükləndi!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-flex">
+            <div>MAHAMMAD OFFLINE AI • RETRO LABORATORY EDITION</div>
+            <div>AIR-GAPPED // NO CLOUD // ZERO TRACKING</div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Məntiqi -->
+    <script>
+        // 1. qurasdir.bat Yükləmə Funksiyası (Blob)
+        function downloadBatFile() {
+            const rawCode = document.getElementById('batCodeText').innerText;
+            const formatted = rawCode.replace(/\n/g, '\r\n');
+            const blob = new Blob([formatted], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'qurasdir.bat';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            showToast("✓ qurasdir.bat yükləndi! Faylı açıb AI-ı başladın.");
+        }
+
+        // 2. Kodu Kopyalama
+        function copyBatCode() {
+            const code = document.getElementById('batCodeText').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                showToast("📋 Skript kodu buferə kopyalandı!");
+            });
+        }
+
+        function showToast(text) {
+            const toast = document.getElementById('toastNotice');
+            toast.innerText = text;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3800);
+        }
+
+        // 3. Lokal Uyğunluq Yoxlayıcısı Məntiqi
+        let currentRam = 8;
+        let currentGpu = 'cpu';
+
+        function setRam(val, btn) {
+            currentRam = val;
+            document.querySelectorAll('#ramGroup .select-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            calculatePerformance();
+        }
+
+        function setGpu(val, btn) {
+            currentGpu = val;
+            document.querySelectorAll('#gpuGroup .select-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            calculatePerformance();
+        }
+
+        function calculatePerformance() {
+            const speedEl = document.getElementById('speedRating');
+            const meterEl = document.getElementById('speedMeter');
+            const recEl = document.getElementById('recommendationText');
+
+            if (currentGpu === 'rtx' && currentRam >= 16) {
+                speedEl.innerHTML = "🔥 Ekstremal Sürət (~55 tok/s)";
+                meterEl.style.width = "98%";
+                meterEl.style.backgroundColor = "#96BD56";
+                recEl.innerHTML = "<strong>Mükəmməl Konfiqurasiya:</strong> Model tamamilə RTX video kartınızın VRAM yaddaşına köçürüləcək. Cavablar göz qırpımında, real vaxtda generasiya olunacaq.";
+            } 
+            else if (currentGpu === 'apple') {
+                speedEl.innerHTML = "⚡ Çox Sürətli (~40 tok/s)";
+                meterEl.style.width = "85%";
+                meterEl.style.backgroundColor = "#96BD56";
+                recEl.innerHTML = "<strong>Apple Metal Dəstəyi:</strong> Vahid yaddaş arxitekturası sayəsində prosessor və qrafik nüvələr yüksək ötürücülük təmin edir.";
+            }
+            else if (currentGpu === 'gtx' || (currentGpu === 'cpu' && currentRam >= 16)) {
+                speedEl.innerHTML = "⚡ Rəvan və Təbii (~22 tok/s)";
+                meterEl.style.width = "68%";
+                meterEl.style.backgroundColor = "#E05738";
+                recEl.innerHTML = "<strong>Çox Yaxşı:</strong> Gündəlik təhlil, kod yoxlanışı və kiber mentorluq üçün tam idealdır. Sürət oxuma tempinizdən daha sürətli olacaq.";
+            }
+            else if (currentRam === 8) {
+                speedEl.innerHTML = "🟢 Rahat İşləmə (~15 tok/s)";
+                meterEl.style.width = "50%";
+                meterEl.style.backgroundColor = "#E05738";
+                recEl.innerHTML = "<strong>Stabil və Kifayət:</strong> 8 GB RAM modelin CPU rejimində rahat işləməsi üçün yetərlidir. Arxa fonda ağır proqramları bağlamaq tövsiyə olunur.";
+            }
+            else {
+                speedEl.innerHTML = "🟡 Orta / Ehtiyatlı (~6 tok/s)";
+                meterEl.style.width = "25%";
+                meterEl.style.backgroundColor = "#E05738";
+                recEl.innerHTML = "<strong>Diqqət:</strong> 4 GB RAM ilə model işləyə bilər, lakin cavablar bir qədər yavaş ola bilər. Yaddaşı 8 GB-a yüksəltmək daha rəvan təcrübə bəxş edər.";
+            }
+        }
+
+        // 4. Ssenarilər Məntiqi
+        const scenarioData = [
+            {
+                q: '"Parametrdə ID dəyərini dəyişəndə başqa istifadəçinin fakturası görünür. Bu zəiflik nədir və necə qorunmalıyıq?"',
+                a: 'Təsvir etdiyiniz vəziyyət <strong>IDOR (Insecure Direct Object Reference)</strong> zəifliyidir.<br><br>Kök səbəb: Server istifadəçinin sessiya hüququnu yoxlamadan birbaşa obyekt ID-sinə güvənir.<br><br>💡 <em>Tövsiyə:</em> Obyektə daxil olmazdan əvvəl tətbiq qatında cari istifadəçinin məhz həmin resursa hüququ olub-olmadığını yoxlayan avtorizasiya filtri tətbiq edin.'
+            },
+            {
+                q: '"Flask tətbiqimdə istifadəçidən gələn adı render_template_string ilə göstərirəm. Təhlükə varmı?"',
+                a: 'Bəli, burada ciddi <strong>SSTI (Server-Side Template Injection)</strong> riski mövcuddur.<br><br>İstifadəçi adı <code>{{ 7*7 }}</code> və ya sistem əmrlərini icra edən Jinja2 payload-ları daxil edərsə, serverinizdə kod icra edə bilər.<br><br>💡 <em>Tövsiyə:</em> <code>render_template_string</code> yerinə şablon fayllarından istifadə edin və dəyişənləri parametr kimi ötürün.'
+            },
+            {
+                q: '"Mənə birbaşa SQL injection exploit-i ver, dərhal saytı sındırım."',
+                a: 'Mən hazır hücum skripti və ya zərərli exploit təqdim etmirəm.<br><br>Lakin sizə zəifliyin mexanizmini izah edə bilərəm: Niyə parametr bazaya ötürüləndə məlumat və əmr bir-birinə qarışır? <br><br>Gəlin əvvəlcə Prepared Statements (parametrləşdirilmiş sorğular) məntiqinə nəzər salaq.'
+            },
+            {
+                q: '"Şirkətimizin daxili audit sənədini analiz etmək istəyirəm, amma buluda yükləməyə icazə yoxdur."',
+                a: 'Mən <strong>100% oflayn</strong> rejimdə kompüterinizdə çalışıram. Şəbəkə bağlantınız sönülü olsa belə daxili hesabatlarınızı, log fayllarınızı və qeydlərinizi tam məxfi şəkildə təhlil edə bilərsiniz. Heç bir bayt məlumat cihazınızdan kənara çıxmır.'
+            }
+        ];
+
+        function switchScenario(idx, btn) {
+            document.querySelectorAll('.scenario-tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const item = scenarioData[idx];
+            document.getElementById('scenarioPrompt').innerText = item.q;
+            document.getElementById('scenarioOutput').innerHTML = item.a;
+        }
+    </script>
+</body>
+</html>
