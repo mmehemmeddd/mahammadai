@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAHAMMAD // Admin İdarəetmə Paneli</title>
+
+    <!-- Retro Laboratoriya Tipoqrafiyası -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-vanilla: #FAF5EB;
+            --bg-surface: #FFFFFF;
+            --bordeaux: #230B12;
+            --pistachio: #96BD56;
+            --pistachio-pale: #EBF2DF;
+            --coral: #E05738;
+            --coral-pale: #FAE9E5;
+            --sand-muted: #E8E0D2;
+            --text-dark: #230B12;
+            --text-muted: #615651;
+            
+            --border-thick: 2px solid #230B12;
+            --border-thin: 1.5px solid #230B12;
+            --shadow-hard: 4px 4px 0px #230B12;
+            --shadow-hard-lg: 6px 6px 0px #230B12;
+            
+            --font-display: 'Space Grotesk', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', Consolas, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-vanilla);
+            color: var(--text-dark);
+            font-family: var(--font-display);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(150, 189, 86, 0.15) 0%, transparent 35%),
+                radial-gradient(circle at 90% 80%, rgba(224, 87, 56, 0.1) 0%, transparent 40%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding-bottom: 5rem;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--bg-vanilla);
+            border-bottom: var(--border-thick);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--bordeaux);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .brand-badge {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            background-color: var(--coral);
+            color: #FFFFFF;
+            padding: 2px 8px;
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn-link-site {
+            text-decoration: none;
+            color: var(--bordeaux);
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background-color: var(--bg-surface);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            transition: all 0.15s;
+        }
+
+        .btn-link-site:hover {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--bordeaux);
+            background-color: var(--pistachio-pale);
+        }
+
+        .btn-admin-logout {
+            background-color: var(--bordeaux);
+            color: var(--bg-vanilla);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 6px 14px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+        }
+
+        /* Admin Giriş Qapısı (Passcode Screen) */
+        .passcode-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-vanilla);
+            z-index: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .passcode-card {
+            background-color: var(--bg-surface);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard-lg);
+            width: 100%;
+            max-width: 420px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .passcode-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .passcode-input {
+            width: 100%;
+            background-color: var(--bg-vanilla);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            padding: 12px 14px;
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 1.25rem 0;
+            outline: none;
+            letter-spacing: 0.15em;
+        }
+
+        .passcode-input:focus {
+            border-color: var(--coral);
+            box-shadow: 3px 3px 0px var(--coral);
+        }
+
+        .btn-passcode-submit {
+            width: 100%;
+            background-color: var(--bordeaux);
+            color: var(--bg-vanilla);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            padding: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-passcode-submit:hover {
+            background-color: var(--coral);
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+        }
+
+        /* Statistika Kartları */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background-color: var(--bg-surface);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--bordeaux);
+            line-height: 1;
+        }
+
+        .stat-icon {
+            font-size: 2.2rem;
+            background-color: var(--pistachio-pale);
+            border: var(--border-thin);
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 0px var(--bordeaux);
+        }
+
+        /* Axtarış və Filtr Barı */
+        .filter-bar {
+            background-color: var(--bg-surface);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-input-wrap {
+            flex: 1;
+            min-width: 280px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            background-color: var(--bg-vanilla);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            padding: 10px 14px;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-filter {
+            background-color: var(--bg-vanilla);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 8px 14px;
+            cursor: pointer;
+        }
+
+        .btn-filter.active {
+            background-color: var(--bordeaux);
+            color: var(--bg-vanilla);
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--bordeaux);
+        }
+
+        /* İstifadəçi Cədvəli */
+        .table-card {
+            background-color: var(--bg-surface);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard-lg);
+            overflow-x: auto;
+        }
+
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.92rem;
+        }
+
+        .users-table th {
+            background-color: var(--bordeaux);
+            color: var(--bg-vanilla);
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 14px 16px;
+            letter-spacing: 0.05em;
+            border-bottom: var(--border-thick);
+        }
+
+        .users-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--sand-muted);
+            vertical-align: middle;
+        }
+
+        .users-table tr:hover {
+            background-color: #FAF5EB;
+        }
+
+        .user-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar-thumb {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: var(--border-thin);
+            background-color: var(--sand-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .provider-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border: 1px solid var(--bordeaux);
+            box-shadow: 1px 1px 0px var(--bordeaux);
+            text-transform: uppercase;
+        }
+
+        .provider-pill.google {
+            background-color: #EBF3FE;
+            color: #1A73E8;
+            border-color: #1A73E8;
+        }
+
+        .provider-pill.email {
+            background-color: var(--pistachio-pale);
+            color: var(--bordeaux);
+        }
+
+        .btn-delete-user {
+            background-color: var(--coral-pale);
+            color: var(--coral);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-delete-user:hover {
+            background-color: var(--coral);
+            color: #FFFFFF;
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--bordeaux);
+        }
+
+        .empty-placeholder {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+
+        /* Toast */
+        .toast-brutal {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--pistachio);
+            color: var(--bordeaux);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard-lg);
+            padding: 1.25rem 1.75rem;
+            font-weight: 700;
+            transform: translateY(160%);
+            transition: transform 0.25s ease;
+            z-index: 999;
+        }
+
+        .toast-brutal.show { transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <!-- Passcode Modal (Admin Açarı Tələbi) -->
+    <div class="passcode-overlay" id="passcodeOverlay">
+        <div class="passcode-card">
+            <div class="passcode-icon">🔐</div>
+            <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--bordeaux);">Admin Girişi</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">
+                İdarəetmə panelinə daxil olmaq üçün təyin edilmiş admin gizli açarını daxil edin.
+            </p>
+            <input type="password" class="passcode-input" id="passcodeInput" placeholder="Açarı daxil edin" autofocus>
+            <div id="passcodeError" style="color: var(--coral); font-family: var(--font-mono); font-size: 0.82rem; margin-bottom: 0.75rem; display: none;">
+                Açar yanlışdır. Yenidən cəhd edin.
+            </div>
+            <button class="btn-passcode-submit" onclick="verifyAdminKey()">Daxil Ol</button>
+            <div style="margin-top: 1rem;">
+                <a href="index.html" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">← Əsas Sayta Qayıt</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <div class="brand-logo">
+                MAHAMMAD
+                <span class="brand-badge">ADMİN PANEL</span>
+            </div>
+            <div class="header-actions">
+                <a href="index.html" class="btn-link-site">← Əsas Sayta Qayıt</a>
+                <button class="btn-admin-logout" onclick="adminLogout()">Çıxış</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" id="adminMain" style="display: none;">
+        
+        <!-- Statistika Paneli -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div>
+                    <div class="stat-label">Ümumi İstifadəçi</div>
+                    <div class="stat-value" id="statTotal">0</div>
+                </div>
+                <div class="stat-icon">👥</div>
+            </div>
+
+            <div class="stat-card">
+                <div>
+                    <div class="stat-label">Google ilə Daxil Olanlar</div>
+                    <div class="stat-value" id="statGoogle" style="color: #1A73E8;">0</div>
+                </div>
+                <div class="stat-icon" style="background-color: #EBF3FE;">🌐</div>
+            </div>
+
+            <div class="stat-card">
+                <div>
+                    <div class="stat-label">Email ilə Qeydiyyat</div>
+                    <div class="stat-value" id="statEmail" style="color: #2E7D32;">0</div>
+                </div>
+                <div class="stat-icon" style="background-color: var(--pistachio-pale);">✉️</div>
+            </div>
+        </section>
+
+        <!-- Axtarış və Filtrlər -->
+        <section class="filter-bar">
+            <div class="search-input-wrap">
+                <input type="text" class="search-input" id="searchInput" placeholder="🔍 Ad və ya email üzrə axtarış..." oninput="handleSearch()">
+            </div>
+            <div class="filter-tabs">
+                <button class="btn-filter active" onclick="setFilter('all', this)">Hamısı</button>
+                <button class="btn-filter" onclick="setFilter('google', this)">Google</button>
+                <button class="btn-filter" onclick="setFilter('email', this)">Email</button>
+            </div>
+        </section>
+
+        <!-- İstifadəçilər Cədvəli -->
+        <section class="table-card">
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>İstifadəçi</th>
+                        <th>Email Ünvanı</th>
+                        <th>Giriş Metodu</th>
+                        <th>Qeydiyyat Tarixi</th>
+                        <th style="text-align: right;">Əməliyyat</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <tr>
+                        <td colspan="6" class="empty-placeholder">Yüklənir...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <!-- Toast Bildiriş -->
+    <div class="toast-brutal" id="toastNotice">
+        <span>Bildiriş</span>
+    </div>
+
+    <script>
+        const API_BASE = (window.location.protocol.startsWith('http') && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1'))
+            ? ''
+            : (window.location.port === '3000' ? '' : 'http://localhost:3000');
+
+        let allUsers = [];
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedKey = sessionStorage.getItem('mahammad_admin_key');
+            if (savedKey) {
+                testAndLoadAdmin(savedKey);
+            }
+        });
+
+        // Passcode Doğrulama
+        async function verifyAdminKey() {
+            const keyInput = document.getElementById('passcodeInput').value.trim();
+            if (!keyInput) return;
+            testAndLoadAdmin(keyInput);
+        }
+
+        document.getElementById('passcodeInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') verifyAdminKey();
+        });
+
+        async function testAndLoadAdmin(key) {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/users`, {
+                    headers: { 'x-admin-key': key }
+                });
+
+                if (res.ok) {
+                    sessionStorage.setItem('mahammad_admin_key', key);
+                    document.getElementById('passcodeOverlay').style.display = 'none';
+                    document.getElementById('adminMain').style.display = 'block';
+                    const data = await res.json();
+                    allUsers = data.users || [];
+                    updateStats();
+                    renderUsersTable();
+                } else {
+                    showPasscodeError();
+                }
+            } catch (err) {
+                // Əgər API əlçatan deyilsə, lokal test üçün açarı yoxla
+                if (key === 'admin12345') {
+                    sessionStorage.setItem('mahammad_admin_key', key);
+                    document.getElementById('passcodeOverlay').style.display = 'none';
+                    document.getElementById('adminMain').style.display = 'block';
+                    loadFallbackUsers();
+                } else {
+                    showPasscodeError();
+                }
+            }
+        }
+
+        function showPasscodeError() {
+            document.getElementById('passcodeError').style.display = 'block';
+            document.getElementById('passcodeInput').focus();
+        }
+
+        function adminLogout() {
+            sessionStorage.removeItem('mahammad_admin_key');
+            window.location.reload();
+        }
+
+        // Baza Sorğusu
+        async function fetchUsers() {
+            const key = sessionStorage.getItem('mahammad_admin_key');
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/users`, {
+                    headers: { 'x-admin-key': key }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    allUsers = data.users || [];
+                    updateStats();
+                    renderUsersTable();
+                }
+            } catch (err) {
+                loadFallbackUsers();
+            }
+        }
+
+        function loadFallbackUsers() {
+            const localUsers = JSON.parse(localStorage.getItem('mahammad_local_users') || '[]');
+            allUsers = localUsers.map(u => ({
+                id: u.id,
+                name: u.name,
+                email: u.email,
+                avatar: u.avatar || null,
+                bio: u.bio || '',
+                auth_provider: u.auth_provider || 'email',
+                createdAt: u.createdAt || new Date().toISOString()
+            }));
+            updateStats();
+            renderUsersTable();
+        }
+
+        function updateStats() {
+            const total = allUsers.length;
+            const googleCount = allUsers.filter(u => u.auth_provider === 'google').length;
+            const emailCount = total - googleCount;
+
+            document.getElementById('statTotal').innerText = total;
+            document.getElementById('statGoogle').innerText = googleCount;
+            document.getElementById('statEmail').innerText = emailCount;
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
+            renderUsersTable();
+        }
+
+        function setFilter(filter, btn) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-tabs .btn-filter').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderUsersTable();
+        }
+
+        function renderUsersTable() {
+            const tbody = document.getElementById('usersTableBody');
+            let filtered = allUsers.filter(u => {
+                const matchesSearch = (u.name || '').toLowerCase().includes(searchQuery) ||
+                                      (u.email || '').toLowerCase().includes(searchQuery);
+                const matchesFilter = (currentFilter === 'all') || (u.auth_provider === currentFilter);
+                return matchesSearch && matchesFilter;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="empty-placeholder">Heç bir istifadəçi tapılmadı.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(u => {
+                const isGoogle = u.auth_provider === 'google';
+                const dateStr = u.createdAt ? new Date(u.createdAt).toLocaleDateString('az-AZ', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' }) : '-';
+                const avatarHtml = u.avatar 
+                    ? `<img src="${escapeHtml(u.avatar)}" class="user-avatar-thumb" alt="Avatar">`
+                    : `<div class="user-avatar-thumb">👤</div>`;
+
+                return `
+                    <tr>
+                        <td style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">${escapeHtml(u.id || '-')}</td>
+                        <td>
+                            <div class="user-cell">
+                                ${avatarHtml}
+                                <div>
+                                    <strong>${escapeHtml(u.name || 'Ad qeyd olunmayıb')}</strong>
+                                    ${u.bio ? `<div style="font-size:0.75rem; color:var(--text-muted); max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(u.bio)}</div>` : ''}
+                                </div>
+                            </div>
+                        </td>
+                        <td style="font-family: var(--font-mono);">${escapeHtml(u.email)}</td>
+                        <td>
+                            <span class="provider-pill ${isGoogle ? 'google' : 'email'}">
+                                ${isGoogle ? '🌐 Google' : '✉️ Email'}
+                            </span>
+                        </td>
+                        <td style="font-size: 0.85rem; color: var(--text-muted);">${dateStr}</td>
+                        <td style="text-align: right;">
+                            <button class="btn-delete-user" onclick="deleteUser('${escapeHtml(u.id)}', '${escapeHtml(u.name || u.email)}')">
+                                🗑️ Sil
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        async function deleteUser(id, name) {
+            if (!confirm(`"${name}" istifadəçisini sistemdən birdəfəlik silmək istədiyinizdən əminsiniz?`)) {
+                return;
+            }
+
+            const key = sessionStorage.getItem('mahammad_admin_key');
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/users/${encodeURIComponent(id)}`, {
+                    method: 'DELETE',
+                    headers: { 'x-admin-key': key }
+                });
+
+                if (res.ok) {
+                    showToast(`✓ "${name}" istifadəçisi uğurla silindi.`);
+                    allUsers = allUsers.filter(u => u.id !== id);
+                    updateStats();
+                    renderUsersTable();
+                } else {
+                    const data = await res.json();
+                    alert(data.error || 'İstifadəçi silinmədi.');
+                }
+            } catch (err) {
+                // Lokal silmə fallback
+                let localUsers = JSON.parse(localStorage.getItem('mahammad_local_users') || '[]');
+                localUsers = localUsers.filter(u => u.id !== id);
+                localStorage.setItem('mahammad_local_users', JSON.stringify(localUsers));
+                allUsers = allUsers.filter(u => u.id !== id);
+                showToast(`✓ "${name}" silindi.`);
+                updateStats();
+                renderUsersTable();
+            }
+        }
+
+        function showToast(text) {
+            const toast = document.getElementById('toastNotice');
+            toast.innerText = text;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+    </script>
+</body>
+</html>

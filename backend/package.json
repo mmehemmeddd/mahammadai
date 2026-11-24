@@ -1,7 +1,7 @@
 {
   "name": "mahammad-offline-ai-backend",
-  "version": "1.0.0",
-  "description": "Mahammad Oflayn AI - Lokal İstifadəçi və Giriş Serveri",
+  "version": "1.1.0",
+  "description": "Mahammad Oflayn AI - SQLite & Google Auth Dəstəkli Backend Server",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -11,7 +11,8 @@
     "offline-ai",
     "ollama",
     "express",
-    "auth"
+    "sqlite3",
+    "google-auth"
   ],
   "author": "Mahammad",
   "license": "MIT",
@@ -19,6 +20,8 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.2"
+    "google-auth-library": "^9.14.1",
+    "jsonwebtoken": "^9.0.2",
+    "sqlite3": "^5.1.7"
   }
 }
