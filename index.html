@@ -895,6 +895,480 @@
             .scenario-tabs { grid-template-columns: 1fr 1fr; }
             .scenario-content { grid-template-columns: 1fr; }
             .steps-brutal-grid { grid-template-columns: 1fr; }
+            .chat-message-row { max-width: 95% !important; }
+        }
+
+        /* ==========================================
+           CANLI AI CHAT BÖLMƏSİ ÜÇÜN XÜSUSİ DİZAYN
+           ========================================== */
+        .chat-section {
+            margin-top: 3.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .chat-box {
+            background-color: var(--bg-surface);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard-lg);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header-bar {
+            background-color: var(--bordeaux);
+            color: var(--bg-vanilla);
+            padding: 0.85rem 1.4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            border-bottom: var(--border-thick);
+        }
+
+        .chat-header-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .chat-status-pill {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .chat-status-pill.online {
+            background-color: rgba(150, 189, 86, 0.22);
+            color: #96BD56;
+            border: 1px solid #96BD56;
+        }
+
+        .chat-status-pill.offline {
+            background-color: rgba(224, 87, 56, 0.22);
+            color: #ff856e;
+            border: 1px solid #E05738;
+        }
+
+        .chat-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .chat-status-pill.online .chat-status-dot {
+            background-color: #96BD56;
+            box-shadow: 0 0 8px #96BD56;
+            animation: pulseGlow 1.8s infinite;
+        }
+
+        .chat-status-pill.offline .chat-status-dot {
+            background-color: #E05738;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.65; }
+        }
+
+        .chat-offline-banner {
+            display: none;
+            background-color: var(--coral-pale);
+            border-bottom: var(--border-thin);
+            color: var(--coral);
+            padding: 0.75rem 1.4rem;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 600;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .chat-controls-bar {
+            background-color: var(--bg-vanilla);
+            border-bottom: var(--border-thin);
+            padding: 0.9rem 1.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .chat-controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+        }
+
+        .chat-provider-toggle {
+            display: inline-flex;
+            background: var(--sand-muted);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            padding: 2px;
+        }
+
+        .btn-provider {
+            border: none;
+            background: transparent;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: all 0.15s ease;
+        }
+
+        .btn-provider.active {
+            background-color: var(--bordeaux);
+            color: var(--bg-vanilla);
+        }
+
+        .chat-model-select {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 6px 10px;
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            background-color: var(--bg-surface);
+            color: var(--bordeaux);
+            cursor: pointer;
+            outline: none;
+            min-width: 190px;
+        }
+
+        .chat-gemini-key-wrap {
+            display: none;
+            padding: 0.65rem 1.4rem 0.8rem;
+            background-color: #F6F9FF;
+            border-bottom: var(--border-thin);
+            gap: 0.75rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .chat-gemini-key-input {
+            flex: 1;
+            min-width: 260px;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            padding: 6px 10px;
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            outline: none;
+            background-color: #FFFFFF;
+        }
+
+        .chat-roles-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .chat-roles-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .btn-role-tab {
+            background-color: var(--bg-surface);
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            cursor: pointer;
+            color: var(--bordeaux);
+            transition: all 0.15s ease;
+        }
+
+        .btn-role-tab:hover {
+            background-color: var(--pistachio-pale);
+        }
+
+        .btn-role-tab.active {
+            background-color: var(--pistachio);
+            color: var(--bordeaux);
+            box-shadow: 1px 1px 0px var(--bordeaux);
+            transform: translate(1px, 1px);
+        }
+
+        .btn-chat-action {
+            background: transparent;
+            border: var(--border-thin);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            background-color: var(--bg-surface);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 10px;
+            cursor: pointer;
+            color: var(--coral);
+            transition: all 0.15s;
+        }
+
+        .btn-chat-action:hover {
+            background-color: var(--coral-pale);
+        }
+
+        .chat-messages-container {
+            height: 480px;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            background-color: #FAF6ED;
+            background-image: radial-gradient(#E8E0D2 1.2px, transparent 1.2px);
+            background-size: 16px 16px;
+            scroll-behavior: smooth;
+        }
+
+        .chat-message-row {
+            display: flex;
+            gap: 12px;
+            max-width: 82%;
+            align-items: flex-start;
+        }
+
+        .chat-message-row.user-row {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .chat-message-row.assistant-row {
+            align-self: flex-start;
+        }
+
+        .chat-msg-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: var(--border-thin);
+            box-shadow: 1.5px 1.5px 0px var(--bordeaux);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            background-color: var(--sand-muted);
+        }
+
+        .chat-message-row.user-row .chat-msg-avatar {
+            background-color: var(--coral-pale);
+        }
+
+        .chat-message-row.assistant-row .chat-msg-avatar {
+            background-color: var(--pistachio);
+        }
+
+        .chat-bubble {
+            padding: 1rem 1.25rem;
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            position: relative;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+
+        .chat-message-row.user-row .chat-bubble {
+            background-color: var(--bordeaux);
+            color: var(--bg-vanilla);
+            border-radius: 12px 2px 12px 12px;
+        }
+
+        .chat-message-row.assistant-row .chat-bubble {
+            background-color: var(--bg-surface);
+            color: var(--text-dark);
+            border-radius: 2px 12px 12px 12px;
+        }
+
+        .chat-bubble p {
+            margin-bottom: 0.75rem;
+        }
+
+        .chat-bubble p:last-child {
+            margin-bottom: 0;
+        }
+
+        .chat-bubble strong {
+            color: inherit;
+            font-weight: 700;
+        }
+
+        .chat-bubble code {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            padding: 2px 6px;
+            background-color: rgba(35, 11, 18, 0.08);
+            border-radius: 4px;
+            border: 1px solid rgba(35, 11, 18, 0.15);
+        }
+
+        .chat-message-row.user-row .chat-bubble code {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #fff;
+        }
+
+        /* Kod Blokları & Kopyalama Düyməsi */
+        .chat-code-block {
+            background-color: #1a080e;
+            color: #FAF5EB;
+            border: var(--border-thick);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            border-radius: 4px;
+            margin: 0.85rem 0;
+            overflow: hidden;
+        }
+
+        .code-block-header {
+            background-color: #2e0e18;
+            padding: 6px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--pistachio);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-copy-code {
+            background-color: transparent;
+            border: 1px solid var(--pistachio);
+            color: var(--pistachio);
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.15s ease;
+        }
+
+        .btn-copy-code:hover {
+            background-color: var(--pistachio);
+            color: var(--bordeaux);
+        }
+
+        .chat-code-block pre {
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: var(--font-mono);
+            font-size: 0.86rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .chat-code-block code {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            color: #FAF5EB !important;
+            font-family: inherit;
+        }
+
+        /* Chat Input Bar */
+        .chat-input-bar {
+            background-color: var(--bg-surface);
+            border-top: var(--border-thick);
+            padding: 1rem 1.4rem;
+            display: flex;
+            gap: 0.85rem;
+            align-items: flex-end;
+        }
+
+        .chat-input-textarea {
+            flex: 1;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            padding: 0.75rem 1rem;
+            border: var(--border-thick);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            border-radius: 0;
+            outline: none;
+            resize: none;
+            min-height: 52px;
+            max-height: 140px;
+            line-height: 1.4;
+            color: var(--text-dark);
+            background-color: var(--bg-vanilla);
+            transition: box-shadow 0.15s ease;
+        }
+
+        .chat-input-textarea:focus {
+            box-shadow: 3px 3px 0px var(--bordeaux);
+            background-color: #FFFFFF;
+        }
+
+        .btn-chat-send {
+            background-color: var(--pistachio);
+            color: var(--bordeaux);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0 1.5rem;
+            height: 52px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        .btn-chat-send:hover:not(:disabled) {
+            transform: translate(1px, 1px);
+            box-shadow: 2px 2px 0px var(--bordeaux);
+            background-color: #87ab4b;
+        }
+
+        .btn-chat-send:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .chat-streaming-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background-color: var(--bordeaux);
+            vertical-align: middle;
+            margin-left: 4px;
+            animation: blinkCursor 0.8s infinite;
+        }
+
+        @keyframes blinkCursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
     </style>
 </head>
@@ -908,6 +1382,7 @@
                 <span class="brand-badge">OFFAİ-01</span>
             </a>
             <nav class="header-nav">
+                <a href="#chat" class="nav-link" style="color:var(--bordeaux); font-weight:700;">💬 AI Chat</a>
                 <a href="#checker" class="nav-link">Uyğunluq Testi</a>
                 <a href="#scenarios" class="nav-link">Ssenarilər</a>
                 <a href="#script" class="nav-link">Skript</a>
@@ -948,13 +1423,16 @@
                     Ollama üzərində optimallaşdırılmış <strong>mahammad</strong> oflayn modeli. Heç bir buluda sorğu getmir, internet tələb olunmur, kiber-analiz və mentorluq birbaşa yerli aparatınızda icra edilir.
                 </p>
                 <div class="hero-actions">
-                    <button class="btn-brutal btn-primary" onclick="initiateDownload()">
+                    <a href="#chat" class="btn-brutal btn-primary" style="text-decoration:none;">
+                        💬 Canlı AI Chat
+                    </a>
+                    <button class="btn-brutal btn-secondary" onclick="initiateDownload()">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                             <polyline points="7 10 12 15 17 10"/>
                             <line x1="12" y1="15" x2="12" y2="3"/>
                         </svg>
-                        Windows üçün Yüklə (.bat)
+                        qurasdir.bat Yüklə
                     </button>
                     <a href="#checker" class="btn-brutal btn-secondary">⚡ Sistemimi Yoxla</a>
                 </div>
@@ -984,6 +1462,114 @@
                 <div class="spec-item-row" style="border:none;">
                     <span>İcra Mühərriki:</span>
                     <span>Ollama Runtime CLI</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CANLI AI CHAT BÖLMƏSİ (Lokal Ollama + Gemini API) -->
+        <section id="chat" class="chat-section">
+            <div class="section-title-wrap">
+                <h2 class="section-title">Canlı AI Laboratoriyası</h2>
+                <span class="section-pill">LOKAL & CLOUD İNTELLEKT</span>
+            </div>
+
+            <div class="chat-box">
+                <!-- Chat Yuxarı Panel: Başlıq, Status və Alətlər -->
+                <div class="chat-header-bar">
+                    <div class="chat-header-title">
+                        <span>🤖 MAHAMMAD CANLI AI</span>
+                        <div class="chat-status-pill offline" id="ollamaStatusPill">
+                            <span class="chat-status-dot"></span>
+                            <span id="ollamaStatusText">Ollama Yoxlanılır...</span>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <button class="btn-chat-action" onclick="clearChatMessages()" title="Bütün söhbət tarixçəsini sıfırla">
+                            🗑️ Söhbəti təmizlə
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Ollama Qoşulmayıb Xəbərdarlığı (Lokal rejimdə və Ollama offline olanda çıxır) -->
+                <div class="chat-offline-banner" id="chatOfflineBanner">
+                    <span>⚠️ <strong>Lokal Ollama qoşulmayıb:</strong> Kompüterinizdə Ollama işləmir və ya CORS icazəsi yoxdur.</span>
+                    <button class="btn-chat-action" style="background:#fff; color:var(--bordeaux);" onclick="initiateDownload()">
+                        📥 qurasdir.bat Yüklə və İşə Sal
+                    </button>
+                </div>
+
+                <!-- İdarəetmə Paneli: Rejim Seçimi, Model Seçimi, Rol Şablonları -->
+                <div class="chat-controls-bar">
+                    <div class="chat-controls-row">
+                        <!-- Provayder Seçimi (Lokal Ollama vs Gemini API) -->
+                        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                            <span class="chat-roles-label">Rejim:</span>
+                            <div class="chat-provider-toggle">
+                                <button type="button" class="btn-provider active" id="btnProviderOllama" onclick="switchChatProvider('ollama')">
+                                    💻 Lokal Ollama
+                                </button>
+                                <button type="button" class="btn-provider" id="btnProviderGemini" onclick="switchChatProvider('gemini')">
+                                    ☁️ Gemini API
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Model Seçimi -->
+                        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                            <span class="chat-roles-label">Model:</span>
+                            <select id="chatModelSelect" class="chat-model-select">
+                                <option value="qwen2.5:3b">qwen2.5:3b (Yüngül)</option>
+                                <option value="mahammad">mahammad (Oflayn Model)</option>
+                                <option value="llama3.1:8b">llama3.1:8b (Standart)</option>
+                                <option value="qwen2.5-coder:7b">qwen2.5-coder:7b (Kod)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Gemini API Açarı Sahəsi (Yalnız Gemini rejimində görünür) -->
+                    <div class="chat-gemini-key-wrap" id="geminiKeyWrap">
+                        <span class="chat-roles-label" style="color:#1A73E8;">🔑 Gemini API Açarı (Opsional):</span>
+                        <input type="password" class="chat-gemini-key-input" id="chatCustomGeminiKey" placeholder="Açarı daxil edin və ya boş buraxın (server açarı istifadə olunsun)">
+                        <span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--text-muted);">
+                            Google AI Studio-dan pulsuz əldə edilə bilər.
+                        </span>
+                    </div>
+
+                    <!-- Rol Şablonları (3 Hazır Düymə) -->
+                    <div class="chat-controls-row" style="padding-top:4px; border-top:1px dashed var(--sand-muted);">
+                        <div class="chat-roles-wrap">
+                            <span class="chat-roles-label">Rol Şablonu:</span>
+                            <button type="button" class="btn-role-tab active" id="roleBtnGeneral" onclick="setChatRole('general')">
+                                🛡️ Ümumi Köməkçi
+                            </button>
+                            <button type="button" class="btn-role-tab" id="roleBtnCoder" onclick="setChatRole('coder')">
+                                💻 Proqramçı / Kod
+                            </button>
+                            <button type="button" class="btn-role-tab" id="roleBtnEditor" onclick="setChatRole('editor')">
+                                ✍️ Mətn Redaktoru
+                            </button>
+                        </div>
+                        <div id="activeRoleDesc" style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">
+                            Aktiv: Kiber təhlil və ümumi laboratoriya bələdçisi.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mesajlar Sahəsi -->
+                <div class="chat-messages-container" id="chatMessagesContainer">
+                    <!-- Salam mesajı JavaScript tərəfindən avtomatik generasiya olunur -->
+                </div>
+
+                <!-- Mesaj Daxiletmə Paneli -->
+                <div class="chat-input-bar">
+                    <textarea id="chatInputText" class="chat-input-textarea" placeholder="Mesajınızı daxil edin... (Göndərmək üçün Enter, yeni sətir üçün Shift+Enter)" rows="1" onkeydown="handleChatInputKeyDown(event)" oninput="autoGrowTextarea(this)"></textarea>
+                    <button type="button" class="btn-chat-send" id="btnChatSend" onclick="sendMessage()">
+                        <span>Göndər</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </section>
@@ -1085,18 +1671,18 @@
                 </div>
                 <pre class="code-box" id="batCodeText"><code>@echo off
 chcp 65001 >nul
-title Mahammad Offline AI - Qurasdirici ve Basladici
+title Mahammad Offline AI - Ağıllı Başladıcı və Quraşdırıcı
 color 0a
 cls
 
 echo ================================================================
-echo       🛡️  MAHAMMAD OFLAYN AI SİSTEMİ - BAŞLADICI  🛡️
+echo       🛡️  MAHAMMAD OFLAYN AI SİSTEMİ - AĞILLI BAŞLADICI  🛡️
 echo ================================================================
-echo [Məlumat] Bu skript 'mahammad' oflayn modelini yoxlayır və başladır.
+echo [Məlumat] Bu skript brauzer inteqrasiyasını və oflayn AI modelini qurur.
 echo.
 
 :: 1. Sistemdə Ollama mühərriki yoxlanılır
-echo [*] 1/2: Sistemdə Ollama yoxlanılır...
+echo [*] 1/3: Sistemdə Ollama mühərriki yoxlanılır...
 where ollama >nul 2>nul
 if %errorlevel% neq 0 (
     color 0c
@@ -1114,24 +1700,56 @@ if %errorlevel% neq 0 (
     pause
     exit /b 1
 )
+echo [✓] Ollama mühərriki aktivdir!
 
-echo [✓] Ollama sistemi aktivdir!
-echo [*] 2/2: 'mahammad' modeli başladılır...
+:: 2. Veb Brauzer və Netlify ilə əlaqə üçün CORS konfiqurasiyası
+echo [*] 2/3: Brauzerlə əlaqə üçün CORS icazələri sazlanır (OLLAMA_ORIGINS)...
+setx OLLAMA_ORIGINS "*" >nul 2>nul
+set OLLAMA_ORIGINS=*
+echo [✓] CORS icazəsi uğurla aktivləşdirildi (*).
+
+:: 3. Model Seçimi
 echo.
 echo ================================================================
-echo   Söhbət başladı! Çıxmaq üçün '/bye' yazıb Enter basın.
+echo        🤖 ZƏHMƏT OLMASA İSTİFADƏ EDƏCƏYİNİZ MODELİ SEÇİN
+echo ================================================================
+echo   [1] Sürətli / Yüngül      (qwen2.5:3b)       - 4-8 GB RAM üçün ideal
+echo   [2] Balanslı / Standart    (llama3.1:8b)      - 8-16 GB RAM üçün əla
+echo   [3] Kodlaşdırma Eksperti   (qwen2.5-coder:7b) - Proqramlaşdırma və Kiber Analiz
+echo   [4] Mahammad Xüsusi Model  (mahammad)         - Xüsusi Lokal Model
+echo ================================================================
+set /p MODEL_CHOICE="Seçiminizi daxil edin [1, 2, 3 və ya 4] (Standart 1): "
+
+set TARGET_MODEL=qwen2.5:3b
+if "%MODEL_CHOICE%"=="1" set TARGET_MODEL=qwen2.5:3b
+if "%MODEL_CHOICE%"=="2" set TARGET_MODEL=llama3.1:8b
+if "%MODEL_CHOICE%"=="3" set TARGET_MODEL=qwen2.5-coder:7b
+if "%MODEL_CHOICE%"=="4" set TARGET_MODEL=mahammad
+
+echo.
+echo [*] 3/3: Seçilmiş model yoxlanılır və yüklənir: %TARGET_MODEL%...
+echo (Əgər model kompüterinizdə yoxdursa, avtomatik endiriləcək)
+echo.
+
+ollama pull %TARGET_MODEL%
+
+echo.
+echo ================================================================
+echo   ✓ Model hazırdır! Canlı terminal söhbəti başladılır.
+echo   ℹ️ Veb səhifədəki "AI Chat" bölməsi də indi canlı qoşulacaq!
+echo   Çıxmaq üçün '/bye' yazıb Enter basın.
 echo ================================================================
 echo.
 
-ollama run mahammad
+ollama run %TARGET_MODEL%
 
 if %errorlevel% neq 0 (
     color 0e
     echo.
-    echo [!] Model işə düşmədi. Yerli modellər siyahınız:
+    echo [!] Model işə salına bilmədi. Yerli modelləriniz:
     ollama list
     echo.
-    echo Əgər model hələ yaradılmayıbsa:
+    echo Əgər 'mahammad' modeli üçün Modelfile tələb olunursa:
     echo    ollama create mahammad -f Modelfile
     echo.
     pause
@@ -1344,6 +1962,7 @@ if %errorlevel% neq 0 (
 
         document.addEventListener('DOMContentLoaded', () => {
             checkAuthSession();
+            initLiveChat();
         });
 
         // 1. Auth Sessiya Yoxlanışı (GET /api/me)
@@ -1864,6 +2483,422 @@ if %errorlevel% neq 0 (
             const item = scenarioData[idx];
             document.getElementById('scenarioPrompt').innerText = item.q;
             document.getElementById('scenarioOutput').innerHTML = item.a;
+        }
+
+        // ==========================================
+        // 10. CANLI AI CHAT MƏNTİQİ (Ollama + Gemini)
+        // ==========================================
+
+        const CHAT_ROLES = {
+            general: {
+                title: "Ümumi Köməkçi",
+                desc: "Aktiv: Kiber təhlil və ümumi laboratoriya bələdçisi.",
+                systemPrompt: "Sən kiber-təhlil və süni intellekt üzrə mehriban, dəqiq və peşəkar köməkçi Mahammad AI-sən. İstifadəçinin suallarına anlaşıqlı, məntiqli və ətraflı cavab ver. Şəxsi məlumatları və məxfiliyi qoru."
+            },
+            coder: {
+                title: "Proqramçı / Kod",
+                desc: "Aktiv: Yüksək ixtisaslı proqram təminatı və kod mühəndisi.",
+                systemPrompt: "Sən yüksək ixtisaslı proqramçı və kod mühəndisi Mahammad AI-sən. Təmiz, sənədləşdirilmiş, təhlükəsiz və optimal kodlar yaz. Hər kod həllini müvafiq proqramlaşdırma dilində kod bloklarında (```dil ... ```) təqdim et və zəruri izahatları ver."
+            },
+            editor: {
+                title: "Mətn Redaktoru",
+                desc: "Aktiv: Peşəkar korrektor, redaktor və texniki yazıçı.",
+                systemPrompt: "Sən peşəkar mətn redaktoru, korrektor və texniki yazıçı Mahammad AI-sən. Mətnləri səlis, qrammatik cəhətdən qüsursuz, aydın və təsirli şəkildə redaktə et, strukturlaşdır və təkmilləşdir."
+            }
+        };
+
+        let currentRoleKey = 'general';
+        let currentProvider = 'ollama';
+        let ollamaOnline = false;
+        let chatHistory = [];
+        let isChatStreaming = false;
+
+        function initLiveChat() {
+            clearChatMessages();
+            checkOllamaStatus();
+            setInterval(checkOllamaStatus, 5000);
+        }
+
+        async function checkOllamaStatus() {
+            const pill = document.getElementById('ollamaStatusPill');
+            const textEl = document.getElementById('ollamaStatusText');
+            const banner = document.getElementById('chatOfflineBanner');
+            const select = document.getElementById('chatModelSelect');
+
+            if (!pill || !textEl) return;
+
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+                const res = await fetch('http://localhost:11434/api/tags', {
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+
+                if (res.ok) {
+                    const data = await res.json();
+                    ollamaOnline = true;
+                    pill.className = 'chat-status-pill online';
+                    textEl.innerText = 'Ollama Aktivdir';
+
+                    if (currentProvider === 'ollama') {
+                        if (banner) banner.style.display = 'none';
+
+                        if (data.models && Array.isArray(data.models) && data.models.length > 0) {
+                            const currentSelected = select ? select.value : '';
+                            const modelNames = data.models.map(m => m.name);
+
+                            const existingOpts = select ? Array.from(select.options).map(o => o.value) : [];
+                            const isSame = modelNames.length === existingOpts.length &&
+                                           modelNames.every((val, idx) => val === existingOpts[idx]);
+
+                            if (!isSame && select) {
+                                select.innerHTML = '';
+                                modelNames.forEach(name => {
+                                    const opt = document.createElement('option');
+                                    opt.value = name;
+                                    opt.innerText = name;
+                                    select.appendChild(opt);
+                                });
+                                if (modelNames.includes(currentSelected)) {
+                                    select.value = currentSelected;
+                                } else if (modelNames.includes('mahammad')) {
+                                    select.value = 'mahammad';
+                                } else if (modelNames.includes('qwen2.5:3b')) {
+                                    select.value = 'qwen2.5:3b';
+                                }
+                            }
+                        }
+                    }
+                    return;
+                }
+            } catch (err) {
+                // Ollama aktiv deyil və ya qoşulmayıb
+            }
+
+            ollamaOnline = false;
+            pill.className = 'chat-status-pill offline';
+            textEl.innerText = 'Ollama Qoşulmayıb';
+            if (currentProvider === 'ollama' && banner) {
+                banner.style.display = 'flex';
+            }
+        }
+
+        function switchChatProvider(provider) {
+            currentProvider = provider;
+            const btnOllama = document.getElementById('btnProviderOllama');
+            const btnGemini = document.getElementById('btnProviderGemini');
+            const keyWrap = document.getElementById('geminiKeyWrap');
+            const banner = document.getElementById('chatOfflineBanner');
+            const select = document.getElementById('chatModelSelect');
+
+            if (provider === 'gemini') {
+                if (btnGemini) btnGemini.classList.add('active');
+                if (btnOllama) btnOllama.classList.remove('active');
+                if (keyWrap) keyWrap.style.display = 'flex';
+                if (banner) banner.style.display = 'none';
+
+                if (select) {
+                    select.innerHTML = `
+                        <option value="gemini-1.5-flash">gemini-1.5-flash (Sürətli)</option>
+                        <option value="gemini-1.5-pro">gemini-1.5-pro (Dərin Təhlil)</option>
+                    `;
+                }
+            } else {
+                if (btnOllama) btnOllama.classList.add('active');
+                if (btnGemini) btnGemini.classList.remove('active');
+                if (keyWrap) keyWrap.style.display = 'none';
+
+                if (!ollamaOnline && banner) {
+                    banner.style.display = 'flex';
+                }
+
+                if (select) {
+                    select.innerHTML = `
+                        <option value="qwen2.5:3b">qwen2.5:3b (Yüngül)</option>
+                        <option value="mahammad">mahammad (Oflayn Model)</option>
+                        <option value="llama3.1:8b">llama3.1:8b (Standart)</option>
+                        <option value="qwen2.5-coder:7b">qwen2.5-coder:7b (Kod)</option>
+                    `;
+                }
+                checkOllamaStatus();
+            }
+        }
+
+        function setChatRole(roleKey) {
+            if (!CHAT_ROLES[roleKey]) return;
+            currentRoleKey = roleKey;
+
+            document.querySelectorAll('.btn-role-tab').forEach(b => b.classList.remove('active'));
+            const targetBtn = document.getElementById(
+                roleKey === 'general' ? 'roleBtnGeneral' : (roleKey === 'coder' ? 'roleBtnCoder' : 'roleBtnEditor')
+            );
+            if (targetBtn) targetBtn.classList.add('active');
+
+            const descEl = document.getElementById('activeRoleDesc');
+            if (descEl) descEl.innerText = CHAT_ROLES[roleKey].desc;
+
+            showToast(`Rol seçildi: ${CHAT_ROLES[roleKey].title}`);
+        }
+
+        function autoGrowTextarea(element) {
+            element.style.height = 'auto';
+            element.style.height = (element.scrollHeight) + 'px';
+        }
+
+        function handleChatInputKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function clearChatMessages() {
+            chatHistory = [];
+            const container = document.getElementById('chatMessagesContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const welcomeBubble = appendChatMessage('assistant', '', false);
+            welcomeBubble.innerHTML = renderMessageContent(
+                `Salam! Mən **Mahammad AI** — sizin fərdi süni intellekt və kiber-laboratoriya mentorunuzam.\n\n` +
+                `Siz iki rejimdən birini seçə bilərsiniz:\n` +
+                `• **💻 Lokal Ollama:** 100% oflayn, məlumatlar kompüterinizdən kənara çıxmır.\n` +
+                `• **☁️ Gemini API:** Yüksək dəqiqlikli bulud mühərriki ilə kiber və analitik tapşırıqlar.\n\n` +
+                `İstənilən sualınızı, kodlaşdırma probleminizi və ya kiber-təhlil ssenarinizi daxil edin!`
+            );
+        }
+
+        function appendChatMessage(role, text = '', isTemp = false) {
+            const container = document.getElementById('chatMessagesContainer');
+            const row = document.createElement('div');
+            row.className = `chat-message-row ${role === 'user' ? 'user-row' : 'assistant-row'}`;
+
+            const avatar = document.createElement('div');
+            avatar.className = 'chat-msg-avatar';
+            avatar.innerText = role === 'user' ? '👤' : '🛡️';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'chat-bubble';
+
+            if (text) {
+                bubble.innerHTML = renderMessageContent(text);
+            } else if (isTemp) {
+                bubble.innerHTML = '<span class="chat-streaming-cursor"></span>';
+            }
+
+            row.appendChild(avatar);
+            row.appendChild(bubble);
+            container.appendChild(row);
+            scrollChatToBottom();
+
+            return bubble;
+        }
+
+        function scrollChatToBottom() {
+            const container = document.getElementById('chatMessagesContainer');
+            if (container) {
+                container.scrollTop = container.scrollHeight;
+            }
+        }
+
+        function copyCodeFromBlock(btn) {
+            const block = btn.closest('.chat-code-block');
+            if (!block) return;
+            const codeEl = block.querySelector('code');
+            if (!codeEl) return;
+            const text = codeEl.innerText;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const orig = btn.innerText;
+                btn.innerText = "✓ Kopyalandı!";
+                btn.style.backgroundColor = "var(--pistachio)";
+                btn.style.color = "var(--bordeaux)";
+                setTimeout(() => {
+                    btn.innerText = orig;
+                    btn.style.backgroundColor = "transparent";
+                    btn.style.color = "var(--pistachio)";
+                }, 2000);
+            });
+        }
+
+        function renderMessageContent(content) {
+            if (!content) return '';
+
+            // 1. Təhlükəsizlik üçün ilkin HTML escape
+            let safe = content
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+
+            // 2. Çoxsətirli Kod Blokları: ```lang ... ```
+            safe = safe.replace(/```([a-zA-Z0-9_\-\+]*)\n([\s\S]*?)```/g, (match, lang, code) => {
+                const displayLang = lang.trim() || 'KOD';
+                return `__CODE_BLOCK_START__<div class="chat-code-block"><div class="code-block-header"><span>${displayLang.toUpperCase()}</span><button type="button" class="btn-copy-code" onclick="copyCodeFromBlock(this)">📋 Kopyala</button></div><pre><code>${code.trim()}</code></pre></div>__CODE_BLOCK_END__`;
+            });
+
+            // 3. Sətirdaxili Kod: `kod`
+            safe = safe.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+            // 4. Qalın: **mətn**
+            safe = safe.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+            // 5. Kursiv: *mətn*
+            safe = safe.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+            // 6. Abzas və sətir keçidləri
+            const parts = safe.split(/(?:__CODE_BLOCK_START__|__CODE_BLOCK_END__)/);
+            let finalHtml = '';
+
+            for (let part of parts) {
+                if (!part) continue;
+                if (part.startsWith('<div class="chat-code-block">')) {
+                    finalHtml += part;
+                } else {
+                    const paragraphs = part.split(/\n\n+/);
+                    finalHtml += paragraphs
+                        .filter(p => p.trim().length > 0)
+                        .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+                        .join('');
+                }
+            }
+
+            return finalHtml || safe;
+        }
+
+        async function sendMessage() {
+            if (isChatStreaming) return;
+
+            const inputEl = document.getElementById('chatInputText');
+            const userText = inputEl.value.trim();
+            if (!userText) return;
+
+            inputEl.value = '';
+            inputEl.style.height = 'auto';
+
+            // İstifadəçi mesajını interfeysə və tarixçəyə əlavə et
+            appendChatMessage('user', userText);
+            chatHistory.push({ role: 'user', content: userText });
+
+            const sendBtn = document.getElementById('btnChatSend');
+            sendBtn.disabled = true;
+            isChatStreaming = true;
+
+            const select = document.getElementById('chatModelSelect');
+            const selectedModel = select ? select.value : (currentProvider === 'gemini' ? 'gemini-1.5-flash' : 'qwen2.5:3b');
+            const systemPrompt = CHAT_ROLES[currentRoleKey].systemPrompt;
+
+            // Köməkçi üçün müvəqqəti bubble yarat
+            const assistantBubble = appendChatMessage('assistant', '', true);
+
+            // 1. REJİM: LOKAL OLLAMA (Streaming NDJSON)
+            if (currentProvider === 'ollama') {
+                if (!ollamaOnline) {
+                    assistantBubble.innerHTML = renderMessageContent(
+                        "⚠️ **Lokal Ollama sistemi hazırda qoşulmayıb.**\n\nLokal model ilə söhbət etmək üçün kompüterinizdə `qurasdir.bat` faylını işə salın və ya yuxarıdan **'Gemini API'** rejiminə keçin."
+                    );
+                    sendBtn.disabled = false;
+                    isChatStreaming = false;
+                    return;
+                }
+
+                try {
+                    const response = await fetch('http://localhost:11434/api/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: selectedModel,
+                            messages: [
+                                { role: 'system', content: systemPrompt },
+                                ...chatHistory
+                            ],
+                            stream: true
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Ollama xətası (Status: ${response.status})`);
+                    }
+
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder('utf-8');
+                    let accumulatedReply = '';
+                    let buffer = '';
+
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+
+                        buffer += decoder.decode(value, { stream: true });
+                        const lines = buffer.split('\n');
+                        buffer = lines.pop();
+
+                        for (const line of lines) {
+                            const trimmed = line.trim();
+                            if (!trimmed) continue;
+                            try {
+                                const parsed = JSON.parse(trimmed);
+                                if (parsed.message && parsed.message.content) {
+                                    accumulatedReply += parsed.message.content;
+                                    assistantBubble.innerHTML = renderMessageContent(accumulatedReply) + '<span class="chat-streaming-cursor"></span>';
+                                    scrollChatToBottom();
+                                }
+                            } catch (e) {}
+                        }
+                    }
+
+                    // Axın bitdi, kursoru sil və yekun formatı göstər
+                    assistantBubble.innerHTML = renderMessageContent(accumulatedReply || 'Cavab boş oldu.');
+                    chatHistory.push({ role: 'assistant', content: accumulatedReply });
+                    scrollChatToBottom();
+
+                } catch (err) {
+                    assistantBubble.innerHTML = renderMessageContent(
+                        `❌ **Ollama ilə əlaqə kəsildi:** ${err.message}\n\n*Qeyd:* Brauzerdən daxil olarkən CORS bloklanmasının qarşısını almaq üçün \`qurasdir.bat\` skriptini işə saldığınızdan əmin olun.`
+                    );
+                } finally {
+                    sendBtn.disabled = false;
+                    isChatStreaming = false;
+                }
+
+            } else {
+                // 2. REJİM: GEMINI API
+                const customKeyEl = document.getElementById('chatCustomGeminiKey');
+                const customKey = customKeyEl ? customKeyEl.value.trim() : '';
+
+                try {
+                    const response = await fetch(`${API_BASE}/api/chat`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            provider: 'gemini',
+                            model: selectedModel,
+                            messages: chatHistory,
+                            systemPrompt: systemPrompt,
+                            apiKey: customKey || undefined
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok && data.reply) {
+                        assistantBubble.innerHTML = renderMessageContent(data.reply);
+                        chatHistory.push({ role: 'assistant', content: data.reply });
+                        scrollChatToBottom();
+                    } else {
+                        const errorMsg = data.error || 'Gemini API-dən cavab alına bilmədi.';
+                        assistantBubble.innerHTML = renderMessageContent(`⚠️ **Gemini Xətası:**\n\n${errorMsg}`);
+                    }
+                } catch (err) {
+                    assistantBubble.innerHTML = renderMessageContent(
+                        `❌ **Serverə qoşulma xətası:** ${err.message}\n\nBackend serverinizin (və ya Netlify funksiyasının) işlək olduğundan əmin olun.`
+                    );
+                } finally {
+                    sendBtn.disabled = false;
+                    isChatStreaming = false;
+                }
+            }
         }
     </script>
 </body>
