@@ -89,8 +89,15 @@ function verifyGoogleToken(idToken) {
     });
 }
 
+function mapGeminiModel(m) {
+    if (!m || m === 'gemini-1.5-flash' || m === 'gemini-2.5-flash' || m === 'gemini-2.5-flash-lite') return 'gemini-flash-lite-latest';
+    if (m === 'gemini-1.5-pro' || m === 'gemini-2.5-pro') return 'gemini-pro-latest';
+    return m;
+}
+
 function requestGeminiChat(effectiveKey, model, messages, systemPrompt) {
     return new Promise((resolve, reject) => {
+        const targetModel = mapGeminiModel(model);
         const formattedContents = [];
         if (Array.isArray(messages)) {
             messages.forEach(msg => {
@@ -108,39 +115,45 @@ function requestGeminiChat(effectiveKey, model, messages, systemPrompt) {
             requestBody.system_instruction = { parts: [{ text: systemPrompt }] };
         }
 
-        const targetModel = model || 'gemini-1.5-flash';
         const postData = JSON.stringify(requestBody);
 
-        const options = {
-            hostname: 'generativelanguage.googleapis.com',
-            path: `/v1beta/models/${targetModel}:generateContent?key=${effectiveKey}`,
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(postData)
-            }
-        };
-
-        const req = https.request(options, (res) => {
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                try {
-                    const result = JSON.parse(data);
-                    if (result.error) {
-                        return reject(new Error(result.error.message || 'Gemini API açarı etibarsızdır.'));
-                    }
-                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text || 'Cavab alınmadı.';
-                    resolve({ reply: text, model: targetModel, provider: 'gemini' });
-                } catch (err) {
-                    reject(err);
+        function doRequest(currentModel, isRetry = false) {
+            const options = {
+                hostname: 'generativelanguage.googleapis.com',
+                path: `/v1beta/models/${currentModel}:generateContent?key=${effectiveKey}`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Content-Length': Buffer.byteLength(postData)
                 }
-            });
-        });
+            };
 
-        req.on('error', reject);
-        req.write(postData);
-        req.end();
+            const req = https.request(options, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                    try {
+                        const result = JSON.parse(data);
+                        if (result.error) {
+                            if (!isRetry && (result.error.code === 404 || result.error.message.includes('not found') || result.error.message.includes('no longer available'))) {
+                                return doRequest('gemini-flash-lite-latest', true);
+                            }
+                            return reject(new Error(result.error.message || 'Gemini API açarı etibarsızdır.'));
+                        }
+                        const text = result.candidates?.[0]?.content?.parts?.[0]?.text || 'Cavab alınmadı.';
+                        resolve({ reply: text, model: currentModel, provider: 'gemini' });
+                    } catch (err) {
+                        reject(err);
+                    }
+                });
+            });
+
+            req.on('error', reject);
+            req.write(postData);
+            req.end();
+        }
+
+        doRequest(targetModel, false);
     });
 }
 

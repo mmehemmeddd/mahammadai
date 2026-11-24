@@ -2601,8 +2601,9 @@ if %errorlevel% neq 0 (
 
                 if (select) {
                     select.innerHTML = `
-                        <option value="gemini-1.5-flash">gemini-1.5-flash (Sürətli)</option>
-                        <option value="gemini-1.5-pro">gemini-1.5-pro (Dərin Təhlil)</option>
+                        <option value="gemini-flash-lite-latest">Gemini Flash (Sürətli & Aktiv)</option>
+                        <option value="gemini-flash-latest">Gemini Flash Latest</option>
+                        <option value="gemini-pro-latest">Gemini Pro (Dərin Təhlil)</option>
                     `;
                 }
             } else {
@@ -2786,7 +2787,7 @@ if %errorlevel% neq 0 (
             isChatStreaming = true;
 
             const select = document.getElementById('chatModelSelect');
-            const selectedModel = select ? select.value : (currentProvider === 'gemini' ? 'gemini-1.5-flash' : 'qwen2.5:3b');
+            const selectedModel = select ? select.value : (currentProvider === 'gemini' ? 'gemini-flash-lite-latest' : 'qwen2.5:3b');
             const systemPrompt = CHAT_ROLES[currentRoleKey].systemPrompt;
 
             // Köməkçi üçün müvəqqəti bubble yarat

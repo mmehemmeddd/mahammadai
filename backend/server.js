@@ -191,51 +191,64 @@ app.post('/api/chat', async (req, res) => {
             };
         }
 
-        const targetModel = model || 'gemini-1.5-flash';
+        function mapGeminiModel(m) {
+            if (!m || m === 'gemini-1.5-flash' || m === 'gemini-2.5-flash' || m === 'gemini-2.5-flash-lite') return 'gemini-flash-lite-latest';
+            if (m === 'gemini-1.5-pro' || m === 'gemini-2.5-pro') return 'gemini-pro-latest';
+            return m;
+        }
+
+        const targetModel = mapGeminiModel(model);
         const postData = JSON.stringify(requestBody);
 
-        const options = {
-            hostname: 'generativelanguage.googleapis.com',
-            path: `/v1beta/models/${targetModel}:generateContent?key=${effectiveKey}`,
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(postData)
-            }
-        };
-
-        const apiReq = https.request(options, (apiRes) => {
-            let data = '';
-            apiRes.on('data', chunk => data += chunk);
-            apiRes.on('end', () => {
-                try {
-                    const result = JSON.parse(data);
-                    if (result.error) {
-                        return res.status(apiRes.statusCode || 400).json({
-                            error: `Gemini API Xətası: ${result.error.message || 'Açar etibarsızdır və ya kvota bitib.'}`
-                        });
-                    }
-
-                    const candidate = result.candidates && result.candidates[0];
-                    const replyText = candidate?.content?.parts?.[0]?.text || 'Cavab alına bilmədi.';
-
-                    return res.json({
-                        reply: replyText,
-                        model: targetModel,
-                        provider: 'gemini'
-                    });
-                } catch (parseErr) {
-                    return res.status(500).json({ error: 'Gemini cavabı emal edilərkən xəta baş verdi.' });
+        function doCall(curModel, isRetry = false) {
+            const options = {
+                hostname: 'generativelanguage.googleapis.com',
+                path: `/v1beta/models/${curModel}:generateContent?key=${effectiveKey}`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Content-Length': Buffer.byteLength(postData)
                 }
+            };
+
+            const apiReq = https.request(options, (apiRes) => {
+                let data = '';
+                apiRes.on('data', chunk => data += chunk);
+                apiRes.on('end', () => {
+                    try {
+                        const result = JSON.parse(data);
+                        if (result.error) {
+                            if (!isRetry && (result.error.code === 404 || result.error.message.includes('not found') || result.error.message.includes('no longer available'))) {
+                                return doCall('gemini-flash-lite-latest', true);
+                            }
+                            return res.status(apiRes.statusCode || 400).json({
+                                error: `Gemini API Xətası: ${result.error.message || 'Açar etibarsızdır və ya kvota bitib.'}`
+                            });
+                        }
+
+                        const candidate = result.candidates && result.candidates[0];
+                        const replyText = candidate?.content?.parts?.[0]?.text || 'Cavab alına bilmədi.';
+
+                        return res.json({
+                            reply: replyText,
+                            model: curModel,
+                            provider: 'gemini'
+                        });
+                    } catch (parseErr) {
+                        return res.status(500).json({ error: 'Gemini cavabı emal edilərkən xəta baş verdi.' });
+                    }
+                });
             });
-        });
 
-        apiReq.on('error', (err) => {
-            return res.status(500).json({ error: 'Gemini serverinə qoşularkən xəta: ' + err.message });
-        });
+            apiReq.on('error', (err) => {
+                return res.status(500).json({ error: 'Gemini serverinə qoşularkən xəta: ' + err.message });
+            });
 
-        apiReq.write(postData);
-        apiReq.end();
+            apiReq.write(postData);
+            apiReq.end();
+        }
+
+        doCall(targetModel, false);
     } catch (err) {
         console.error('[Xəta] Chat API:', err);
         return res.status(500).json({ error: 'Server daxili xətası baş verdi.' });

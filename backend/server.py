@@ -131,9 +131,15 @@ def verify_google_token(id_token):
         return None, str(e)
 
 # Gemini API Çağırışı
+def map_gemini_model(m):
+    if not m or m in ["gemini-1.5-flash", "gemini-2.5-flash", "gemini-2.5-flash-lite"]:
+        return "gemini-flash-lite-latest"
+    if m in ["gemini-1.5-pro", "gemini-2.5-pro"]:
+        return "gemini-pro-latest"
+    return m
+
 def call_gemini_api(effective_key, target_model, messages, system_prompt):
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{target_model}:generateContent?key={effective_key}"
-    
+    target_model = map_gemini_model(target_model)
     formatted_contents = []
     if isinstance(messages, list):
         for msg in messages:
@@ -160,32 +166,41 @@ def call_gemini_api(effective_key, target_model, messages, system_prompt):
         }
         
     data_bytes = json.dumps(req_body).encode("utf-8")
-    req = urllib.request.Request(
-        url,
-        data=data_bytes,
-        headers={"Content-Type": "application/json", "User-Agent": "Mahammad-AI-Python"}
-    )
     
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            res_data = json.loads(resp.read().decode("utf-8"))
-            if "error" in res_data:
-                return None, res_data["error"].get("message", "Açar etibarsızdır və ya kvota bitib.")
-            candidates = res_data.get("candidates", [])
-            reply_text = "Cavab alına bilmədi."
-            if candidates and "content" in candidates[0]:
-                parts = candidates[0]["content"].get("parts", [])
-                if parts:
-                    reply_text = parts[0].get("text", "")
-            return reply_text, None
-    except urllib.error.HTTPError as e:
+    def do_call(cur_model, is_retry=False):
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{cur_model}:generateContent?key={effective_key}"
+        req = urllib.request.Request(
+            url,
+            data=data_bytes,
+            headers={"Content-Type": "application/json", "User-Agent": "Mahammad-AI-Python"}
+        )
         try:
-            err_json = json.loads(e.read().decode("utf-8"))
-            return None, err_json.get("error", {}).get("message", e.reason)
-        except Exception:
-            return None, f"HTTP Xətası {e.code}: {e.reason}"
-    except Exception as e:
-        return None, str(e)
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                res_data = json.loads(resp.read().decode("utf-8"))
+                if "error" in res_data:
+                    if not is_retry and ("not found" in res_data["error"].get("message", "") or "no longer available" in res_data["error"].get("message", "")):
+                        return do_call("gemini-flash-lite-latest", True)
+                    return None, res_data["error"].get("message", "Açar etibarsızdır və ya kvota bitib.")
+                candidates = res_data.get("candidates", [])
+                reply_text = "Cavab alına bilmədi."
+                if candidates and "content" in candidates[0]:
+                    parts = candidates[0]["content"].get("parts", [])
+                    if parts:
+                        reply_text = parts[0].get("text", "")
+                return reply_text, None
+        except urllib.error.HTTPError as e:
+            try:
+                err_json = json.loads(e.read().decode("utf-8"))
+                err_msg = err_json.get("error", {}).get("message", e.reason)
+                if not is_retry and (e.code == 404 or "not found" in err_msg or "no longer available" in err_msg):
+                    return do_call("gemini-flash-lite-latest", True)
+                return None, err_msg
+            except Exception:
+                return None, f"HTTP Xətası {e.code}: {e.reason}"
+        except Exception as e:
+            return None, str(e)
+
+    return do_call(target_model, False)
 
 # Xüsusi HTTP Server Handler
 class AppHandler(SimpleHTTPRequestHandler):
